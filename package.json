@@ -1,0 +1,28 @@
+{
+  "name": "noqueue",
+  "version": "0.0.1",
+  "description": "Not Only Queue",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Bello!!!!\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiro-hiro/noqueue.git"
+  },
+  "keywords": [
+    "queue",
+    "synchronous",
+    "round",
+    "robin",
+    "failover",
+    "event",
+    "handle"
+  ],
+  "author": "chiro@fkguru.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chiro-hiro/noqueue/issues"
+  },
+  "homepage": "https://github.com/chiro-hiro/noqueue#readme"
+}
