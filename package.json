@@ -1,6 +1,6 @@
 {
   "name": "noqueue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Not Only Queue",
   "main": "index.js",
   "scripts": {
