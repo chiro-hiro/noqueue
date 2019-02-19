@@ -18,6 +18,35 @@ function noQueue(options) {
 }
 
 noQueue.prototype = {
+
+  //Get once event
+  _getOnceEventName: (event) => (`___once_event___${event}`),
+
+  //Execute on success
+  then: function (callback) {
+    this.once('___then___', callback);
+  },
+
+  //Execute on error
+  catch: function (callback) {
+    this.once('___catch___', callback);
+  },
+
+  //Resolve
+  resolve: function (value) {
+    this.emit('___then___', value);
+  },
+
+  //Reject
+  reject: function (error) {
+    this.emit('___catch___', error);
+  },
+
+  //Register event
+  once: function (eventName, callback) {
+    return this.on(this._getOnceEventName(eventName), callback);
+  },
+
   //Register event
   on: function (eventName, callback) {
     if (typeof (callback) !== 'function') throw new TypeError('Invalid callback function');
@@ -34,6 +63,9 @@ noQueue.prototype = {
     let params = Array.from(arguments);
     if (params.length === 0) return;
     let eventName = params[0];
+    let onceEvent = this._getOnceEventName(eventName);
+
+    //Listented event
     if (typeof this._events[eventName] !== 'undefined' && Array.isArray(this._events[eventName])) {
       for (let i = 0; i < this._events[eventName].length; i++) {
         let callback = this._events[eventName][i];
@@ -41,6 +73,18 @@ noQueue.prototype = {
           callback.apply(null, params.slice(1));
         }
       }
+    }
+
+    //Listented once
+    if (typeof this._events[onceEvent] !== 'undefined' && Array.isArray(this._events[onceEvent])) {
+      for (let i = 0; i < this._events[onceEvent].length; i++) {
+        let callback = this._events[onceEvent][i];
+        if (typeof callback === 'function') {
+          callback.apply(null, params.slice(1));
+        }
+      }
+      //Remove event after success called
+      delete this._events[onceEvent];
     }
     return this;
   },
@@ -88,10 +132,10 @@ noQueue.prototype = {
       .then((event) => {
         //Trigger event if existing
         if (typeof (event) === 'object'
-          && typeof (event.eventName) !== 'undefined'
+          && typeof (event.name) !== 'undefined'
           && typeof (event.data) !== 'undefined') {
           //Emit event
-          this.emit(event.eventName, event.data);
+          this.emit(event.name, event.data);
         }
       })
       .catch((error) => {
