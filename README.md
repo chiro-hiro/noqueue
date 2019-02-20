@@ -3,42 +3,104 @@
 
 A feature rich queue with event dispatch.
 
+## Installation
+
+```
+install i -g noqueue
+```
+_Required: Node.JS >= 10.x.x_
+
+## Basic usage
+
 ```js
-var myQueue = new noQueue({ delay: 1000 });
+const noQueue = require('noqueue');
+var myQueue = new noQueue();
+```
 
-myQueue.on('logme', function (date) {
-  console.log('logme', date);
-})
+### Queue example
 
-myQueue.add('test1', function () {
-  console.log('Test 1');
-  return new Promise((resolve) => {
-    resolve({
-      name: 'logme',
-      data: (new Date()).toString()
-    });
+Create a queue to execute by ordering.
+
+```js
+myQueue.add('Job 1', function () {
+  return new Promise((resolve, reject) => {
+    try{
+      console.log('Job 1 done');
+      resolve();
+    }catch(error){
+      reject(error);
+    }
   });
 });
 
-myQueue.add('test2', function () {
-  console.log('Test 2');
-  return new Promise((resolve) => { resolve(true); });
-});
-
-myQueue.add('test3', function () {
-  console.log('Test 3');
-  myQueue.remove('test2');
-  return new Promise(function (resolve, reject) {
-    let delay = ((Math.random() * 10000) | 0);
-    if (delay > 5000) {
-      setTimeout(() => {
-        resolve(true);
-      }, delay);
-    } else {
-      reject(new Error('My error'));
+myQueue.add('Job 2', function () {
+  return new Promise((resolve, reject) => {
+    try{
+      console.log('Job 2 done');
+      resolve();
+    }catch(error){
+      reject(error);
     }
   });
 });
 
 myQueue.start();
+```
+
+**Result**
+
+```
+Job 1 done
+Job 2 done
+Job 1 done
+Job 2 done
+```
+
+## Event dispatch
+
+```js
+myQueue.on('job-done', (value)=>{
+  console.log(`[event:job-done] ${value}`);
+});
+
+myQueue.add('Job 1', function () {
+  return new Promise((resolve, reject) => {
+    try{
+      console.log('Job 1 done');
+      myQueue.emit('job-done', 'job 1');
+      resolve();
+    }catch(error){
+      reject(error);
+    }
+  });
+});
+
+myQueue.add('Job 2', function () {
+  return new Promise((resolve, reject) => {
+    try{
+      console.log('Job 2 done');
+      myQueue.emit('job-done', 'job 2');
+      resolve();
+    }catch(error){
+      reject(error);
+    }
+  });
+});
+
+myQueue.start();
+```
+
+**Result:**
+
+```
+Job 1 done
+[event:job-done] job 1
+Job 2 done
+[event:job-done] job 2
+Job 1 done
+[event:job-done] job 1
+Job 2 done
+[event:job-done] job 2
+Job 1 done
+[event:job-done] job 1
 ```
