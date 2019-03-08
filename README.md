@@ -6,7 +6,7 @@ A feature rich queue with event dispatch.
 ## Installation
 
 ```
-install i -g noqueue
+install i noqueue
 ```
 _Required: Node.JS >= 10.x.x_
 
@@ -15,33 +15,31 @@ _Required: Node.JS >= 10.x.x_
 ```js
 const noQueue = require('noqueue');
 var myQueue = new noQueue();
-```
 
-### Queue example
-
-Create a queue to execute by ordering.
-
-```js
-myQueue.add('Job 1', function () {
-  return new Promise((resolve, reject) => {
-    try{
-      console.log('Job 1 done');
-      resolve();
-    }catch(error){
-      reject(error);
-    }
-  });
+myQueue.on('job-done', (value) => {
+  console.log('[EVENT:job-done]', value);
 });
 
-myQueue.add('Job 2', function () {
-  return new Promise((resolve, reject) => {
-    try{
-      console.log('Job 2 done');
-      resolve();
-    }catch(error){
-      reject(error);
-    }
-  });
+myQueue.add('Job 1', async (value) => {
+  console.log('Previous result:', value, '| Job 1 done');
+  return 'J1';
+});
+
+myQueue.add('Job 2', async (value) => {
+  console.log('Previous result:', value, '| Job 2 done');
+  return 'J2';
+});
+
+myQueue.add('Job 3', async (value) => {
+  console.log('Previous result:', value, '| Job 3 done');
+  return {
+    name: 'job-done',
+    data: [1, 2, 3]
+  };
+});
+
+myQueue.add('Job 4', async () => {
+  console.log('Job 4 done');
 });
 
 myQueue.start();
@@ -50,41 +48,31 @@ myQueue.start();
 **Result**
 
 ```
-Job 1 done
-Job 2 done
-Job 1 done
-Job 2 done
+Previous result: undefined | Job 1 done
+Previous result: J1 | Job 2 done
+Previous result: J2 | Job 3 done
+[EVENT:job-done] [ 1, 2, 3 ]
+Job 4 done
+Previous result: undefined | Job 1 done
+Previous result: J1 | Job 2 done
+Previous result: J2 | Job 3 done
+[EVENT:job-done] [ 1, 2, 3 ]
+Job 4 done
 ```
 
 ## Event dispatch
 
 ```js
 myQueue.on('job-done', (value)=>{
-  console.log(`[event:job-done] ${value}`);
+  console.log(`[EVENT:job-done] ${value}`);
 });
 
-myQueue.add('Job 1', function () {
-  return new Promise((resolve, reject) => {
-    try{
-      console.log('Job 1 done');
-      myQueue.emit('job-done', 'job 1');
-      resolve();
-    }catch(error){
-      reject(error);
-    }
-  });
+myQueue.add('Job 1', async () => {
+  myQueue.emit('job-done', 'job 1');
 });
 
-myQueue.add('Job 2', function () {
-  return new Promise((resolve, reject) => {
-    try{
-      console.log('Job 2 done');
-      myQueue.emit('job-done', 'job 2');
-      resolve();
-    }catch(error){
-      reject(error);
-    }
-  });
+myQueue.add('Job 2', async () => {
+  myQueue.emit('job-done', 'job 2');
 });
 
 myQueue.start();
@@ -93,14 +81,6 @@ myQueue.start();
 **Result:**
 
 ```
-Job 1 done
-[event:job-done] job 1
-Job 2 done
-[event:job-done] job 2
-Job 1 done
-[event:job-done] job 1
-Job 2 done
-[event:job-done] job 2
-Job 1 done
-[event:job-done] job 1
+[EVENT:job-done] job 1
+[EVENT:job-done] job 2
 ```

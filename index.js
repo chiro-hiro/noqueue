@@ -24,22 +24,22 @@ noQueue.prototype = {
 
   //Execute on success
   then: function (callback) {
-    this.once('___then___', callback);
+    return this.once('___then___', callback);
   },
 
   //Execute on error
   catch: function (callback) {
-    this.once('___catch___', callback);
+    return this.once('___catch___', callback);
   },
 
   //Resolve
   resolve: function (value) {
-    this.emit('___then___', value);
+    return this.emit('___then___', value);
   },
 
   //Reject
   reject: function (error) {
-    this.emit('___catch___', error);
+    return this.emit('___catch___', error);
   },
 
   //Register event
@@ -98,7 +98,7 @@ noQueue.prototype = {
     return this;
   },
 
-  //Remove callack to queue
+  //Remove callack from queue
   remove: function (name) {
     if (typeof (this._queue[name]) !== 'undefined') {
       this._order.splice(this._order.indexOf(name), 1);
@@ -119,7 +119,10 @@ noQueue.prototype = {
   //Worker instance
   _worker: function () {
     if (this._handler !== 0) return;
+    let _self = this;
+    let params = Array.from(arguments);
     let nextFunction = this._next();
+    let ret = [];
     if (typeof nextFunction === 'undefined' && this._handler === 0) {
       //Register empty worker
       this._handler = setTimeout(() => {
@@ -128,26 +131,29 @@ noQueue.prototype = {
       }, this._settings.delay);
       return;
     }
-    nextFunction.apply(null)
-      .then((event) => {
+    nextFunction.apply(null, params)
+      .then((value) => {
         //Trigger event if existing
-        if (typeof (event) === 'object'
-          && typeof (event.name) !== 'undefined'
-          && typeof (event.data) !== 'undefined') {
+        if (value
+          && typeof (value) === 'object'
+          && typeof (value.name) !== 'undefined'
+          && typeof (value.data) !== 'undefined') {
           //Emit event
-          this.emit(event.name, event.data);
+          this.emit(value.name, value.data);
         }
+        ret = [value];
       })
       .catch((error) => {
         console.error(error);
       })
-      .finally(() => {
+      .finally(function () {
+
         //Single worker
-        if (this._handler === 0) {
-          this._handler = setTimeout(() => {
-            this._handler = 0;
-            this._worker();
-          }, this._settings.delay);
+        if (_self._handler === 0) {
+          _self._handler = setTimeout(() => {
+            _self._handler = 0;
+            _self._worker.apply(_self, ret);
+          }, _self._settings.delay);
         }
       });
   },
