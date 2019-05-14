@@ -1,7 +1,7 @@
 {
   "name": "noqueue",
-  "version": "0.1.4",
-  "description": "Not Only Queue",
+  "version": "1.2.1",
+  "description": "not only Queue",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/chiro-hiro/noqueue#readme",
   "devDependencies": {
-    "mocha": "^6.0.0"
+    "mocha": "^6.1.4"
   }
 }
