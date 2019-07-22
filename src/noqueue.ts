@@ -14,7 +14,11 @@ export class noQueue {
 
   private counter: number = 0
 
+  private currentThread: string = ''
+
   private handler: any
+
+  private stopped: boolean = false
 
   constructor(conf?: settings) {
     if (conf) {
@@ -37,22 +41,25 @@ export class noQueue {
 
   //Execute on error
   catch(callback: Function): noQueue {
-    return this.once('___catch___', callback);
+    return this.once('___catch___', callback)
   }
 
   //Resolve
   resolve(value: any): noQueue {
-    return this.emit('___then___', value);
+    return this.emit('___then___', value)
   }
 
   //Reject
   reject(error: Error): noQueue {
-    return this.emit('___catch___', error);
+    return this.emit('___catch___', error)
   }
 
 
+  //Add event handler
   public on(eventName: string, callback: Function): noQueue {
-    if (typeof (this.events[eventName]) === 'undefined') {
+    if (typeof eventName !== 'string') throw new TypeError('Event name wasn\'t a string')
+    if (typeof callback !== 'function') throw new TypeError('Callback wasn\'t a function')
+    if (!this.isExistedEvent(eventName)) {
       this.events[eventName] = [callback]
     } else {
       this.events[eventName].push(callback)
@@ -60,12 +67,14 @@ export class noQueue {
     return this
   }
 
+  //Add once time event
   public once(eventName: string, callback: Function): noQueue {
     return this.on(this.getOnceEventName(eventName), callback)
   }
 
+  //Emit event
   public emit(eventName: string, ...params: any): noQueue {
-    if (!eventName) return this
+    if (typeof eventName !== 'string') throw new TypeError('Event name wasn\'t a string')
 
     let onceEvent = this.getOnceEventName(eventName)
 
@@ -83,7 +92,7 @@ export class noQueue {
         let callback = this.events[onceEvent][i]
         if (typeof callback === 'function') callback.apply(null, params)
       }
-      //Remove event after success called
+      //Remove once time event after success called
       delete this.events[onceEvent]
     }
     return this
@@ -91,7 +100,9 @@ export class noQueue {
 
   //Add callback to queue
   public add(name: string, callback: Function): noQueue {
-    if (typeof this.queue[name] !== 'undefined' || typeof callback !== 'function') return this
+    if (typeof this.queue[name] !== 'undefined') throw new TypeError(`${name} was existed in queue`)
+    if (typeof name !== 'string') throw new TypeError('`name` was not string')
+    if (typeof callback !== 'function') throw new TypeError('`callback` was not function')
     this.queue[name] = callback
     this.order.push(name)
     return this
@@ -112,22 +123,23 @@ export class noQueue {
       || typeof (this.order[this.counter]) === 'undefined') {
       this.counter = 0
     }
-    return this.queue[this.order[this.counter++]]
+    this.currentThread = this.order[this.counter++]
+    return this.queue[this.currentThread]
   }
 
   //Worker instance
   private worker(...params: any) {
-    if (this.handler !== null) return;
-    let _self = this;
-    let nextFunction = this.next();
-    let ret: any = [];
+    if (this.handler !== null || this.stopped) return
+    let _self = this
+    let nextFunction = this.next()
+    let ret: any = []
     if (typeof nextFunction === 'undefined' && this.handler === null) {
       //Register empty worker
       this.handler = setTimeout(() => {
-        this.handler = null;
-        this.worker();
-      }, this.config.delay);
-      return;
+        this.handler = null
+        this.worker()
+      }, this.config.delay)
+      return
     }
     nextFunction.apply(null, params)
       .then((value: any) => {
@@ -137,35 +149,39 @@ export class noQueue {
           && typeof (value.name) !== 'undefined'
           && typeof (value.data) !== 'undefined') {
           //Emit event
-          this.emit(value.name, value.data);
+          this.emit(value.name, value.data)
         }
-        ret = [value];
+        ret = [value]
       })
       .catch((error: Error) => {
-        console.error('[noQueue]', error);
+        _self.emit('error', error)
       })
       .finally(function () {
         //Single worker
         if (_self.handler === null) {
           _self.handler = setTimeout(() => {
-            _self.handler = null;
-            _self.worker.apply(_self, ret);
-          }, _self.config.delay);
+            _self.handler = null
+            _self.worker.apply(_self, ret)
+          }, _self.config.delay)
         }
-      });
+      })
   }
 
   //Start woker
   public start() {
-    clearTimeout(this.handler);
-    this.handler = null;
-    this.worker();
+    clearTimeout(this.handler)
+    this.handler = null
+    this.stopped = false
+    this.worker()
+    return true
   }
 
   //Stop worker
   public stop() {
-    clearTimeout(this.handler);
-    this.handler = null;
-    this.counter = 0;
+    clearTimeout(this.handler)
+    this.stopped = true
+    this.handler = null
+    this.counter = 0
+    return true
   }
 }

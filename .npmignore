@@ -1,6 +1,6 @@
-docs/
-test/
-node_modules/
-.git/
-src/
+docs
+test
+node_modules
+.git
+src
 tsconfig.json
