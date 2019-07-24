@@ -1,10 +1,12 @@
 {
   "name": "noqueue",
-  "version": "1.4.3",
+  "version": "2.1.1",
   "description": "not only Queue",
-  "main": "index.js",
+  "types": "./lib/index.d.ts",
+  "main": "./lib/index.js",
   "scripts": {
-    "test": "tsc && mocha"
+    "build": "node devel.js && rm -rf built && tsc",
+    "test": "npm run-script build && mocha"
   },
   "repository": {
     "type": "git",
@@ -27,5 +29,8 @@
   "homepage": "https://github.com/chiro-hiro/noqueue#readme",
   "devDependencies": {
     "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "@types/node": "^12.6.8"
   }
 }
