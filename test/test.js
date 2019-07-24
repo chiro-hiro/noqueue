@@ -1,15 +1,15 @@
 var assert = require('assert');
-var noQueue = require('../index');
+var noQueue = require('../built/index');
 var instance = null;
 var testQueueResult = [];
 var testEventResult = [];
 
-describe('noQueue', () => {
+describe('noQueue.Queue', () => {
 
   describe('.constructor()', () => {
 
     it('should able to create new instance', () => {
-      instance = new noQueue({ delay: 1000 });
+      instance = new noQueue.Queue({ delay: 1000 });
       assert.notEqual(instance, null);
     });
 

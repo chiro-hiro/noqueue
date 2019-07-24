@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "strict": true,
     "moduleResolution": "node",
@@ -9,12 +9,15 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
-    "outDir": "lib/",
-    "lib": ["es2015", "dom"]
+    "declaration": true,
+    "outDir": "./built/",
+    "types": [
+      "node"
+    ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "index.ts"
   ],
   "exclude": [
     "node_modules",
