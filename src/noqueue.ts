@@ -12,6 +12,10 @@ export class noQueue {
 
   private order: Array<string> = []
 
+  private paddingTime: any = {};
+
+  private scheduleTime: any = {};
+
   private counter: number = 0
 
   private currentThread: string = ''
@@ -19,6 +23,16 @@ export class noQueue {
   private handler: any
 
   private stopped: boolean = false
+
+  public static EVERY_DAY = noQueue.toTime(24)
+
+  public static EVERY_HOUR = noQueue.toTime(1)
+
+  public static EVERY_MINUTE = noQueue.toTime(0, 1)
+
+  public static toTime(hour: number = 0, min: number = 0, sec: number = 0): number {
+    return ((hour * 60 + min) * 60 + sec) * 1000
+  }
 
   constructor(conf?: settings) {
     if (conf) {
@@ -99,10 +113,13 @@ export class noQueue {
   }
 
   //Add callback to queue
-  public add(name: string, callback: Function): noQueue {
+  public add(name: string, callback: Function, paddingTimeTime: number = 0): noQueue {
+    if (arguments.length < 2) throw new Error('Expecting 2 or 3 arguments')
     if (typeof this.queue[name] !== 'undefined') throw new TypeError(`${name} was existed in queue`)
     if (typeof name !== 'string') throw new TypeError('`name` was not string')
     if (typeof callback !== 'function') throw new TypeError('`callback` was not function')
+    this.paddingTime[name] = paddingTimeTime
+    this.scheduleTime[name] = paddingTimeTime + Date.now()
     this.queue[name] = callback
     this.order.push(name)
     return this
@@ -113,18 +130,27 @@ export class noQueue {
     if (typeof this.queue[name] !== 'undefined') {
       this.order.splice(this.order.indexOf(name), 1)
       delete this.queue[name]
+      delete this.paddingTime[name]
+      delete this.scheduleTime[name]
     }
     return this
   }
 
   //Next function in queue
   private next(): Function {
-    if (this.counter >= this.order.length
-      || typeof (this.order[this.counter]) === 'undefined') {
-      this.counter = 0
-    }
+    //Empty queue
+    if (this.order.length < 1) return (async () => { throw new Error('Queue is empty now') })
+    //Reset counter
+    if (this.counter >= this.order.length || typeof (this.order[this.counter]) === 'undefined') this.counter = 0
+    let _self = this;
+    let curTime = Date.now()
     this.currentThread = this.order[this.counter++]
-    return this.queue[this.currentThread]
+    if (curTime >= this.scheduleTime[this.currentThread]) {
+      //Scheduling for next run
+      this.scheduleTime[this.currentThread] = curTime + this.paddingTime[this.currentThread]
+      return this.queue[this.currentThread]
+    }
+    return (async () => { _self.emit('time-leap', this.currentThread, this.scheduleTime[this.currentThread]) })
   }
 
   //Worker instance
