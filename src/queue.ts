@@ -1,5 +1,5 @@
 import { EventDispatcher } from "./event-dispatcher"
-import { TimeSchedule, Settings } from "./utilities"
+import { TimeSchedule, Settings, Events } from "./utilities"
 import * as Cluster from "cluster"
 
 export class Queue extends EventDispatcher {
@@ -43,14 +43,15 @@ export class Queue extends EventDispatcher {
   }
 
   //Remove callack from queue
-  public remove(name: string): Queue {
+  public remove(name: string): boolean {
     if (typeof this.queue[name] !== 'undefined') {
       this.order.splice(this.order.indexOf(name), 1)
       delete this.queue[name]
       delete this.paddingTime[name]
       delete this.scheduleTime[name]
+      return typeof this.queue[name] === 'undefined';
     }
-    return this
+    return false;
   }
 
   //Next function in queue
@@ -92,7 +93,8 @@ export class Queue extends EventDispatcher {
           && typeof (value.name) !== 'undefined'
           && typeof (value.data) !== 'undefined') {
           //Emit event
-          this.emit(value.name, value.data)
+          //@ts-ignore
+          this.emit.apply(this, [value.name].concat(value.data));
         }
         ret = [value]
       })

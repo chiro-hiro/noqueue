@@ -14,3 +14,8 @@ export enum TimeSchedule {
 export interface Settings {
   delay: number
 }
+
+export interface Events {
+  name: string,
+  data: any[]
+}
