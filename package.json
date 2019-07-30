@@ -1,9 +1,9 @@
 {
   "name": "noqueue",
-  "version": "2.1.1",
+  "version": "2.1.6",
   "description": "not only Queue",
-  "types": "./lib/index.d.ts",
-  "main": "./lib/index.js",
+  "types": "./built/index.d.ts",
+  "main": "./built/index.js",
   "scripts": {
     "build": "node devel.js && rm -rf built && tsc",
     "test": "npm run-script build && mocha"
@@ -15,8 +15,7 @@
   "keywords": [
     "queue",
     "synchronous",
-    "round",
-    "robin",
+    "round-robin",
     "failover",
     "event",
     "handle"

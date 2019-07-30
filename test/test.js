@@ -11,6 +11,7 @@ describe('noQueue.Queue', () => {
     it('should able to create new instance', () => {
       instance = new noQueue.Queue({ delay: 1000 });
       assert.notEqual(instance, null);
+      assert.equal(instance instanceof noQueue.Queue, true);
     });
 
   });
