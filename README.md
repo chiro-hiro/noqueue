@@ -151,10 +151,10 @@ clusterService.add('express2', async () => {
   console.log('Express 2');
 });
 
-clusterService.on('success', (...params: any) => {
-  console.log(params);
-}).on('error', (...params: any) => {
-  console.log(params);
+clusterService.on('success', (name) => {
+  console.log('Success execute:', name);
+}).on('error', (error) => {
+  console.log('Got error:', error);
 })
 
 clusterService.start();
@@ -164,12 +164,21 @@ clusterService.start();
 
 ```
 Express 2
-{ success: true, name: 'express2' }
-{ success: false,
-  name: 'express1',
-  reason: 'Child process timeout',
-  stack:
-   'Error: Child process timeout\n    at Timeout.setTimeout [as _onTimeout] (/home/chirohiro/Gits/chiro-hiro/noqueue/built/service-cluster.js:67:45)\n    at ontimeout (timers.js:436:11)\n    at tryOnTimeout (timers.js:300:5)\n    at listOnTimeout (timers.js:263:5)\n    at Timer.processTimers (timers.js:223:10)' }
+Success execute: express2
+Got error: [express1] Child process timeout - Error: Child process timeout
+    at Timeout.setTimeout [as _onTimeout] (/home/chirohiro/Gits/chiro-hiro/test/node_modules/noqueue/built/service-cluster.js:84:45)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
 Express 2
-{ success: true, name: 'express2' }
+Success execute: express2
+Express 2
+Success execute: express2
+Got error: [express1] Child process timeout - Error: Child process timeout
+    at Timeout.setTimeout [as _onTimeout] (/home/chirohiro/Gits/chiro-hiro/test/node_modules/noqueue/built/service-cluster.js:84:45)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
 ```

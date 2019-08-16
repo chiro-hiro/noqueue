@@ -1,6 +1,6 @@
 {
   "name": "noqueue",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "not only Queue",
   "types": "./built/index.d.ts",
   "main": "./built/index.js",
