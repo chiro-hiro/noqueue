@@ -131,3 +131,45 @@ Found error: Error: Unexpected error happend
 Name: Job 1 { data: 'job 1 data' }
 Name: Job 2 { data: 'job 2 data' }
 ```
+
+## Run tasks in clusters
+
+```js
+const noQueue = require('noqueue');
+let clusterService = new noQueue.ClusterService()
+
+clusterService.add('express1', () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('Express 1');
+      resolve();
+    }, 20000);
+  });
+}, 1000);
+
+clusterService.add('express2', async () => {
+  console.log('Express 2');
+});
+
+clusterService.on('success', (...params: any) => {
+  console.log(params);
+}).on('error', (...params: any) => {
+  console.log(params);
+})
+
+clusterService.start();
+```
+
+**Result**
+
+```
+Express 2
+{ success: true, name: 'express2' }
+{ success: false,
+  name: 'express1',
+  reason: 'Child process timeout',
+  stack:
+   'Error: Child process timeout\n    at Timeout.setTimeout [as _onTimeout] (/home/chirohiro/Gits/chiro-hiro/noqueue/built/service-cluster.js:67:45)\n    at ontimeout (timers.js:436:11)\n    at tryOnTimeout (timers.js:300:5)\n    at listOnTimeout (timers.js:263:5)\n    at Timer.processTimers (timers.js:223:10)' }
+Express 2
+{ success: true, name: 'express2' }
+```

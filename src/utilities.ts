@@ -1,5 +1,3 @@
-export const getOnceTimeEventName = (event: string): string => `___once_event___${event}`
-
 export const toTimestamp = (hour: number = 0, min: number = 0, sec: number = 0): number => {
   return ((hour * 60 + min) * 60 + sec) * 1000
 }

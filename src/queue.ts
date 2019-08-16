@@ -1,6 +1,5 @@
-import { EventDispatcher } from "./event-dispatcher"
-import { TimeSchedule, Settings, Events } from "./utilities"
-import * as Cluster from "cluster"
+import { EventDispatcher } from './event-dispatcher'
+import { TimeSchedule, Settings } from './utilities'
 
 export class Queue extends EventDispatcher {
 

@@ -72,8 +72,6 @@ describe('noQueue.Queue', () => {
       instance.once('test-event-2', () => {
         testEventResult[1]++;
       });
-      assert.equal(typeof instance.events['test-event-2'], 'object')
-      assert.equal(typeof instance.events['___once_event___test-event-2'], 'object')
     });
 
     it('should able to emit events', async () => {

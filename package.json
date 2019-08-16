@@ -1,6 +1,6 @@
 {
   "name": "noqueue",
-  "version": "2.1.23",
+  "version": "2.2.4",
   "description": "not only Queue",
   "types": "./built/index.d.ts",
   "main": "./built/index.js",
@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/chiro-hiro/noqueue#readme",
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "typescript": "^3.5.3"
   },
   "dependencies": {
     "@types/node": "^12.6.8"
