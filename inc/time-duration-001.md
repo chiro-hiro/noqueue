@@ -51,7 +51,7 @@ console.log('Result A+B:', iDurationSum.toString());
 
 Result:
 
-```
+```text
 Before A: 4 hours 52 minutes 21 seconds 312 milliseconds
 Before B: 3 hours 40 minutes 42 seconds 532 milliseconds
 After A: 4 hours 52 minutes 21 seconds 312 milliseconds
@@ -59,7 +59,7 @@ After B: 3 hours 40 minutes 42 seconds 532 milliseconds
 Result A+B: 8 hours 33 minutes 3 seconds 844 milliseconds
 ```
 
-As you see, A and B weren't change after calculation.
+As you see, A and B weren't changed after calculation.
 
 We could shorten these code, in case you don't want to reuse `iDurationB`:
 

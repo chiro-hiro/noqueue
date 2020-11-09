@@ -73,7 +73,7 @@
 						<a href="#introduction" id="introduction" style="color: inherit; text-decoration: none;">
 							<h2>Introduction</h2>
 						</a>
-						<p><a href="infinity_loop.queueloop.html">QueueLoop</a> allowed you do jobs by sequence and repeate them just one by one till the loop was stopped by invoke <a href="infinity_loop.queueloop.html#stop">QueueLoop.stop</a></p>
+						<p><a href="infinity_loop.queueloop.html">QueueLoop</a> allowed you do jobs by sequence and repeat them just one by one till the loop was stopped by invoke <a href="infinity_loop.queueloop.html#stop">QueueLoop.stop</a></p>
 						<a href="#example-code" id="example-code" style="color: inherit; text-decoration: none;">
 							<h3>Example code</h3>
 						</a>
@@ -105,29 +105,29 @@ iQueueLoop
     TimeDuration.fromSecond(<span class="hljs-number">2</span>), <span class="hljs-comment">// After job-3 is done, wait for 2 seconds</span>
   );
 
-<span class="hljs-comment">// Listent on success event</span>
+<span class="hljs-comment">// Listen on success event</span>
 iQueueLoop.on(<span class="hljs-string">&#x27;success&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">eventName, ...params: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Event <span class="hljs-subst">${eventName}</span> completed with result:`</span>, params);
 });
 
-<span class="hljs-comment">// Listent on error event</span>
+<span class="hljs-comment">// Listen on error event</span>
 iQueueLoop.on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">eventName, error</span>) =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Event <span class="hljs-subst">${eventName}</span> failed with error:`</span>, error);
 });
 
 iQueueLoop.start();</code></pre>
-						<p>Here are the result:</p>
-						<pre><code>Event job-1 completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ <span class="hljs-string">&#x27;job-1-result&#x27;</span> ]
-Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">input</span> params: { job1Result: <span class="hljs-string">&#x27;job-1-result&#x27;</span> }
-<span class="hljs-keyword">Event</span> job<span class="hljs-number">-2</span> completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ undefined ]
-<span class="hljs-keyword">Event</span> job<span class="hljs-number">-3</span> <span class="hljs-keyword">failed</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">error</span>: <span class="hljs-keyword">Error</span>: This an annoying <span class="hljs-keyword">error</span>
-    <span class="hljs-keyword">at</span> testQueue.add.add.add (/home/<span class="hljs-keyword">user</span>/gits/noqueue/test4.ts:<span class="hljs-number">23</span>:<span class="hljs-number">13</span>)
-    <span class="hljs-keyword">at</span> QueueLoop.worker (/home/<span class="hljs-keyword">user</span>/gits/noqueue/src/queue-loop.ts:<span class="hljs-number">195</span>:<span class="hljs-number">5</span>)
-    <span class="hljs-keyword">at</span> Timeout.handler.setTimeout [<span class="hljs-keyword">as</span> _onTimeout] (/home/<span class="hljs-keyword">user</span>/gits/noqueue/src/queue-loop.ts:<span class="hljs-number">210</span>:<span class="hljs-number">20</span>)
-    <span class="hljs-keyword">at</span> ontimeout (timers.js:<span class="hljs-number">436</span>:<span class="hljs-number">11</span>)
-    <span class="hljs-keyword">at</span> tryOnTimeout (timers.js:<span class="hljs-number">300</span>:<span class="hljs-number">5</span>)
-    <span class="hljs-keyword">at</span> listOnTimeout (timers.js:<span class="hljs-number">263</span>:<span class="hljs-number">5</span>)
-    <span class="hljs-keyword">at</span> Timer.processTimers (timers.js:<span class="hljs-number">223</span>:<span class="hljs-number">10</span>)</code></pre>
+						<p>Here is the result:</p>
+						<pre><code class="language-text">Event job-1 completed with result: [ &#x27;job-1-result&#x27; ]
+Processing job-1 with input params: { job1Result: &#x27;job-1-result&#x27; }
+Event job-2 completed with result: [ undefined ]
+Event job-3 failed with error: Error: This an annoying error
+    at testQueue.add.add.add (/home/user/gits/noqueue/test4.ts:23:13)
+    at QueueLoop.worker (/home/user/gits/noqueue/src/queue-loop.ts:195:5)
+    at Timeout.handler.setTimeout [as _onTimeout] (/home/user/gits/noqueue/src/queue-loop.ts:210:20)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)</code></pre>
 						<p>Even there are an error, it won&#39;t break the loop. <a href="infinity_loop.queueloop.html">QueueLoop</a> is just keep moving on.</p>
 					</div>
 					<dl class="tsd-comment-tags">
@@ -201,7 +201,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L90">queue-loop.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L90">queue-loop.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -238,7 +238,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;error&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L90">queue-loop.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L90">queue-loop.ts:90</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,7 +260,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 					<div class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;success&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L82">queue-loop.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L82">queue-loop.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -289,7 +289,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L128">queue-loop.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L128">queue-loop.ts:128</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -335,7 +335,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#catch">catch</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L56">event-dispatcher.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L56">event-dispatcher.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,7 +372,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#emit">emit</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L155">event-dispatcher.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L155">event-dispatcher.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -415,7 +415,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#eventnames">eventNames</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L85">event-dispatcher.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L85">event-dispatcher.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -443,7 +443,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L116">queue-loop.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L116">queue-loop.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -470,7 +470,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L107">queue-loop.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L107">queue-loop.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -498,7 +498,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#on">on</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L124">event-dispatcher.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L124">event-dispatcher.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -541,7 +541,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#once">once</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L143">event-dispatcher.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L143">event-dispatcher.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -584,7 +584,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#reject">reject</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L76">event-dispatcher.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L76">event-dispatcher.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -620,7 +620,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L146">queue-loop.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L146">queue-loop.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -657,7 +657,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#removealllisteners">removeAllListeners</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L104">event-dispatcher.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L104">event-dispatcher.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -694,7 +694,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#resolve">resolve</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L66">event-dispatcher.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L66">event-dispatcher.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -730,7 +730,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L223">queue-loop.ts:223</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L223">queue-loop.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -757,7 +757,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/queue-loop.ts#L236">queue-loop.ts:236</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/queue-loop.ts#L236">queue-loop.ts:236</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -785,7 +785,7 @@ Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">wit
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#then">then</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L46">event-dispatcher.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L46">event-dispatcher.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

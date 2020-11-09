@@ -1,6 +1,6 @@
 ## Introduction
 
-[[ParallelLoop]] allowed you to trigger all jobs separately, It guaratees that, the same job won't be trigger twice but different jobs will be happened at the same time.
+[[ParallelLoop]] allowed you to trigger all jobs separately, It guarantees that, the same job won't be trigger twice but different jobs will be happened at the same time.
 
 ## Example code
 
@@ -38,7 +38,7 @@ iParallelLoop.start();
 
 Result:
 
-```
+```text
 Event job-2 completed with result: [ 'job-2-result' ]
 Event job-2 completed with result: [ 'job-2-result' ]
 Event job-2 completed with result: [ 'job-2-result' ]
@@ -46,4 +46,4 @@ Event job-2 completed with result: [ 'job-2-result' ]
 Event job-1 completed with result: [ 'job-1-result' ]
 ```
 
-As you see, padding time betwen `job-2` is 5 seconds that's why `job-1` will be triggered after 5 times of `job-2`.
+As you see, padding time between `job-2` is 5 seconds that's why `job-1` will be triggered after 5 times of `job-2`.

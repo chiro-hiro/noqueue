@@ -115,12 +115,12 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Result A+B:&#x27;</span>, iDurationSum.toString());</code></pre>
 						<p>Result:</p>
-						<pre><code><span class="hljs-attr">Before A:</span> <span class="hljs-number">4</span> <span class="hljs-string">hours</span> <span class="hljs-number">52</span> <span class="hljs-string">minutes</span> <span class="hljs-number">21</span> <span class="hljs-string">seconds</span> <span class="hljs-number">312</span> <span class="hljs-string">milliseconds</span>
-<span class="hljs-attr">Before B:</span> <span class="hljs-number">3</span> <span class="hljs-string">hours</span> <span class="hljs-number">40</span> <span class="hljs-string">minutes</span> <span class="hljs-number">42</span> <span class="hljs-string">seconds</span> <span class="hljs-number">532</span> <span class="hljs-string">milliseconds</span>
-<span class="hljs-attr">After A:</span> <span class="hljs-number">4</span> <span class="hljs-string">hours</span> <span class="hljs-number">52</span> <span class="hljs-string">minutes</span> <span class="hljs-number">21</span> <span class="hljs-string">seconds</span> <span class="hljs-number">312</span> <span class="hljs-string">milliseconds</span>
-<span class="hljs-attr">After B:</span> <span class="hljs-number">3</span> <span class="hljs-string">hours</span> <span class="hljs-number">40</span> <span class="hljs-string">minutes</span> <span class="hljs-number">42</span> <span class="hljs-string">seconds</span> <span class="hljs-number">532</span> <span class="hljs-string">milliseconds</span>
-<span class="hljs-string">Result</span> <span class="hljs-string">A+B:</span> <span class="hljs-number">8</span> <span class="hljs-string">hours</span> <span class="hljs-number">33</span> <span class="hljs-string">minutes</span> <span class="hljs-number">3</span> <span class="hljs-string">seconds</span> <span class="hljs-number">844</span> <span class="hljs-string">milliseconds</span></code></pre>
-						<p>As you see, A and B weren&#39;t change after calculation.</p>
+						<pre><code class="language-text">Before A: 4 hours 52 minutes 21 seconds 312 milliseconds
+Before B: 3 hours 40 minutes 42 seconds 532 milliseconds
+After A: 4 hours 52 minutes 21 seconds 312 milliseconds
+After B: 3 hours 40 minutes 42 seconds 532 milliseconds
+Result A+B: 8 hours 33 minutes 3 seconds 844 milliseconds</code></pre>
+						<p>As you see, A and B weren&#39;t changed after calculation.</p>
 						<p>We could shorten these code, in case you don&#39;t want to reuse <code>iDurationB</code>:</p>
 						<pre><code class="language-ts"><span class="hljs-keyword">const</span> iDurationA = <span class="hljs-keyword">new</span> TimeDuration(<span class="hljs-number">4</span>, <span class="hljs-number">52</span>, <span class="hljs-number">21</span>, <span class="hljs-number">312</span>);
 <span class="hljs-keyword">const</span> iDurationSum = .add(TimeDuration.fromMillisecond(<span class="hljs-number">13242532</span>));
@@ -189,7 +189,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L37">time-duration.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L37">time-duration.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -254,7 +254,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L158">time-duration.ts:158</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L158">time-duration.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -290,7 +290,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L182">time-duration.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L182">time-duration.ts:182</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -326,7 +326,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L193">time-duration.ts:193</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L193">time-duration.ts:193</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -362,7 +362,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L203">time-duration.ts:203</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L203">time-duration.ts:203</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -398,7 +398,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L213">time-duration.ts:213</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L213">time-duration.ts:213</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -434,7 +434,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L223">time-duration.ts:223</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L223">time-duration.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -470,7 +470,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L233">time-duration.ts:233</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L233">time-duration.ts:233</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -506,7 +506,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L114">time-duration.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L114">time-duration.ts:114</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -542,7 +542,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L147">time-duration.ts:147</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L147">time-duration.ts:147</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -575,7 +575,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L125">time-duration.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L125">time-duration.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -611,7 +611,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L136">time-duration.ts:136</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L136">time-duration.ts:136</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -647,7 +647,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L168">time-duration.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L168">time-duration.ts:168</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -683,7 +683,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L242">time-duration.ts:242</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L242">time-duration.ts:242</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -710,7 +710,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L251">time-duration.ts:251</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L251">time-duration.ts:251</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -737,7 +737,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L260">time-duration.ts:260</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L260">time-duration.ts:260</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -764,7 +764,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L104">time-duration.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L104">time-duration.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -802,7 +802,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L61">time-duration.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L61">time-duration.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -840,7 +840,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L91">time-duration.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L91">time-duration.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -878,7 +878,7 @@ iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class=
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/time-duration.ts#L77">time-duration.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/time-duration.ts#L77">time-duration.ts:77</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

@@ -24,7 +24,7 @@ import { Utilities } from './src/index';
 
 Result:
 
-```
+```text
 The fastest is: Second
 ```
 

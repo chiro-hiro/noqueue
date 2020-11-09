@@ -1,6 +1,6 @@
 ## Introduction
 
-[[QueueLoop]] allowed you do jobs by sequence and repeate them just one by one till the loop was stopped by invoke [[QueueLoop.stop]]
+[[QueueLoop]] allowed you do jobs by sequence and repeat them just one by one till the loop was stopped by invoke [[QueueLoop.stop]]
 
 ### Example code
 
@@ -34,12 +34,12 @@ iQueueLoop
     TimeDuration.fromSecond(2), // After job-3 is done, wait for 2 seconds
   );
 
-// Listent on success event
+// Listen on success event
 iQueueLoop.on('success', (eventName, ...params: any[]) => {
   console.log(`Event ${eventName} completed with result:`, params);
 });
 
-// Listent on error event
+// Listen on error event
 iQueueLoop.on('error', (eventName, error) => {
   console.log(`Event ${eventName} failed with error:`, error);
 });
@@ -47,9 +47,9 @@ iQueueLoop.on('error', (eventName, error) => {
 iQueueLoop.start();
 ```
 
-Here are the result:
+Here is the result:
 
-```
+```text
 Event job-1 completed with result: [ 'job-1-result' ]
 Processing job-1 with input params: { job1Result: 'job-1-result' }
 Event job-2 completed with result: [ undefined ]

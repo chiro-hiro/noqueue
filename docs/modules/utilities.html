@@ -92,7 +92,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/utilities.ts#L11">utilities.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/utilities.ts#L11">utilities.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -138,12 +138,12 @@
   <span class="hljs-built_in">console</span>.log(result);
 })();</code></pre>
 									<p>Result:</p>
-									<pre><code>[ { <span class="hljs-attr">success:</span> <span class="hljs-literal">true</span>, <span class="hljs-attr">result:</span> <span class="hljs-string">&#x27;First&#x27;</span> },
-  { <span class="hljs-attr">success:</span> <span class="hljs-literal">false</span>,
-    <span class="hljs-symbol">result:</span>
-     <span class="hljs-symbol">Error:</span> Unexpected result
-         at sleepRandom (<span class="hljs-regexp">/home/</span>chiro<span class="hljs-regexp">/gits/</span>chiro-hiro<span class="hljs-regexp">/noqueue/</span>test1.<span class="hljs-attr">ts:</span><span class="hljs-number">9</span>:<span class="hljs-number">9</span>) },
-  { <span class="hljs-attr">success:</span> <span class="hljs-literal">true</span>, <span class="hljs-attr">result:</span> <span class="hljs-string">&#x27;Third&#x27;</span> } ]</code></pre>
+									<pre><code class="language-text">[ { success: true, result: &#x27;First&#x27; },
+  { success: false,
+    result:
+     Error: Unexpected result
+         at sleepRandom (/home/chiro/gits/chiro-hiro/noqueue/test1.ts:9:9) },
+  { success: true, result: &#x27;Third&#x27; } ]</code></pre>
 									<p>Results of all given functions will be appeared after all promises are fulfilled.</p>
 								</div>
 								<dl class="tsd-comment-tags">
@@ -174,7 +174,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/utilities.ts#L38">utilities.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/utilities.ts#L38">utilities.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,7 +203,7 @@
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;The fastest is:&#x27;</span>, result);
 })();</code></pre>
 									<p>Result:</p>
-									<pre><code>The fastest <span class="hljs-keyword">is</span>: <span class="hljs-built_in">Second</span></code></pre>
+									<pre><code class="language-text">The fastest is: Second</code></pre>
 									<p>As you see, we have one winner here. If there are an <code>Error</code>, It&#39;s fine too that meant all tasks were failed.</p>
 								</div>
 								<dl class="tsd-comment-tags">
@@ -234,7 +234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/utilities.ts#L80">utilities.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/utilities.ts#L80">utilities.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -249,18 +249,22 @@
 (<span class="hljs-keyword">async</span> () =&gt; {
   <span class="hljs-keyword">let</span> tried = <span class="hljs-number">0</span>;
   <span class="hljs-comment">// Retries heavy task each 2 second, max retries are 5 times</span>
-  <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> Utilities.TillSuccess(<span class="hljs-keyword">async</span> () =&gt; {
-    tried += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Trying <span class="hljs-subst">${tried}</span> time(s)`</span>);
-    <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;Yes&#x27;</span>);
-  }, <span class="hljs-number">2000</span>, <span class="hljs-number">5</span>);
+  <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> Utilities.TillSuccess(
+    <span class="hljs-keyword">async</span> () =&gt; {
+      tried += <span class="hljs-number">1</span>;
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Trying <span class="hljs-subst">${tried}</span> time(s)`</span>);
+      <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;Yes&#x27;</span>);
+    },
+    <span class="hljs-number">2000</span>,
+    <span class="hljs-number">5</span>,
+  );
 
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Was it successful?&#x27;</span>, result);
 })();</code></pre>
 									<p>Result:</p>
-									<pre><code><span class="hljs-string">Trying</span> <span class="hljs-number">1</span> <span class="hljs-string">time(s)</span>
-<span class="hljs-string">Trying</span> <span class="hljs-number">2</span> <span class="hljs-string">time(s)</span>
-<span class="hljs-string">Was</span> <span class="hljs-string">it</span> <span class="hljs-string">successful?</span> <span class="hljs-literal">Yes</span></code></pre>
+									<pre><code class="language-text">Trying 1 time(s)
+Trying 2 time(s)
+Was it successful? Yes</code></pre>
 									<p>If we&#39;re fail all the times, an <code>Error</code> will be threw.</p>
 								</div>
 								<dl class="tsd-comment-tags">
@@ -306,7 +310,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/utilities.ts#L66">utilities.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/utilities.ts#L66">utilities.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

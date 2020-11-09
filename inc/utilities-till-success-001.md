@@ -8,11 +8,15 @@ import { Utilities } from './src/index';
 (async () => {
   let tried = 0;
   // Retries heavy task each 2 second, max retries are 5 times
-  let result = await Utilities.TillSuccess(async () => {
-    tried += 1;
-    console.log(`Trying ${tried} time(s)`);
-    return heavyTask('Yes');
-  }, 2000, 5);
+  let result = await Utilities.TillSuccess(
+    async () => {
+      tried += 1;
+      console.log(`Trying ${tried} time(s)`);
+      return heavyTask('Yes');
+    },
+    2000,
+    5,
+  );
 
   console.log('Was it successful?', result);
 })();
@@ -20,7 +24,7 @@ import { Utilities } from './src/index';
 
 Result:
 
-```
+```text
 Trying 1 time(s)
 Trying 2 time(s)
 Was it successful? Yes

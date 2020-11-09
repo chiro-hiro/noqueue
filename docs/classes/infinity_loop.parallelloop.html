@@ -73,7 +73,7 @@
 						<a href="#introduction" id="introduction" style="color: inherit; text-decoration: none;">
 							<h2>Introduction</h2>
 						</a>
-						<p><a href="infinity_loop.parallelloop.html">ParallelLoop</a> allowed you to trigger all jobs separately, It guaratees that, the same job won&#39;t be trigger twice but different jobs will be happened at the same time.</p>
+						<p><a href="infinity_loop.parallelloop.html">ParallelLoop</a> allowed you to trigger all jobs separately, It guarantees that, the same job won&#39;t be trigger twice but different jobs will be happened at the same time.</p>
 						<a href="#example-code" id="example-code" style="color: inherit; text-decoration: none;">
 							<h2>Example code</h2>
 						</a>
@@ -107,12 +107,12 @@ iParallelLoop.on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class
 
 iParallelLoop.start();</code></pre>
 						<p>Result:</p>
-						<pre><code><span class="hljs-keyword">Event</span> job-<span class="hljs-number">2</span> completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ <span class="hljs-string">&#x27;job-2-result&#x27;</span> ]
-<span class="hljs-keyword">Event</span> job-<span class="hljs-number">2</span> completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ <span class="hljs-string">&#x27;job-2-result&#x27;</span> ]
-<span class="hljs-keyword">Event</span> job-<span class="hljs-number">2</span> completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ <span class="hljs-string">&#x27;job-2-result&#x27;</span> ]
-<span class="hljs-keyword">Event</span> job-<span class="hljs-number">2</span> completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ <span class="hljs-string">&#x27;job-2-result&#x27;</span> ]
-<span class="hljs-keyword">Event</span> job-<span class="hljs-number">1</span> completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ <span class="hljs-string">&#x27;job-1-result&#x27;</span> ]</code></pre>
-						<p>As you see, padding time betwen <code>job-2</code> is 5 seconds that&#39;s why <code>job-1</code> will be triggered after 5 times of <code>job-2</code>.</p>
+						<pre><code class="language-text">Event job-2 completed with result: [ &#x27;job-2-result&#x27; ]
+Event job-2 completed with result: [ &#x27;job-2-result&#x27; ]
+Event job-2 completed with result: [ &#x27;job-2-result&#x27; ]
+Event job-2 completed with result: [ &#x27;job-2-result&#x27; ]
+Event job-1 completed with result: [ &#x27;job-1-result&#x27; ]</code></pre>
+						<p>As you see, padding time between <code>job-2</code> is 5 seconds that&#39;s why <code>job-1</code> will be triggered after 5 times of <code>job-2</code>.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>export</dt>
@@ -176,7 +176,7 @@ iParallelLoop.start();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/parallel-loop.ts#L90">parallel-loop.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/parallel-loop.ts#L90">parallel-loop.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -212,7 +212,7 @@ iParallelLoop.start();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/parallel-loop.ts#L110">parallel-loop.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/parallel-loop.ts#L110">parallel-loop.ts:110</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -261,7 +261,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#catch">catch</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L56">event-dispatcher.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L56">event-dispatcher.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -298,7 +298,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#emit">emit</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L155">event-dispatcher.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L155">event-dispatcher.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -341,7 +341,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#eventnames">eventNames</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L85">event-dispatcher.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L85">event-dispatcher.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -370,7 +370,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#on">on</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L124">event-dispatcher.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L124">event-dispatcher.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -413,7 +413,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#once">once</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L143">event-dispatcher.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L143">event-dispatcher.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -456,7 +456,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#reject">reject</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L76">event-dispatcher.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L76">event-dispatcher.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -492,7 +492,7 @@ iParallelLoop.start();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/parallel-loop.ts#L129">parallel-loop.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/parallel-loop.ts#L129">parallel-loop.ts:129</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,7 +529,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#removealllisteners">removeAllListeners</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L104">event-dispatcher.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L104">event-dispatcher.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -566,7 +566,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#resolve">resolve</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L66">event-dispatcher.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L66">event-dispatcher.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -602,7 +602,7 @@ iParallelLoop.start();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/parallel-loop.ts#L211">parallel-loop.ts:211</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/parallel-loop.ts#L211">parallel-loop.ts:211</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -629,7 +629,7 @@ iParallelLoop.start();</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/parallel-loop.ts#L224">parallel-loop.ts:224</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/parallel-loop.ts#L224">parallel-loop.ts:224</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -657,7 +657,7 @@ iParallelLoop.start();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#then">then</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/c34ebf1/src/event-dispatcher.ts#L46">event-dispatcher.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d12f72c/src/event-dispatcher.ts#L46">event-dispatcher.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

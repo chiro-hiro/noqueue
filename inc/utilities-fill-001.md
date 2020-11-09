@@ -45,7 +45,7 @@ import { Utilities } from './src/index';
 
 Result:
 
-```
+```text
 [ { success: true, result: 'First' },
   { success: false,
     result:
