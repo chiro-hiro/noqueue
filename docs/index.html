@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>noQueue - v3.0.4</title>
-	<meta name="description" content="Documentation for noQueue - v3.0.4">
+	<title>noQueue - v3.0.7</title>
+	<meta name="description" content="Documentation for noQueue - v3.0.7">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">noQueue - v3.0.4</a>
+					<a href="index.html" class="title">noQueue - v3.0.7</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>noQueue - v3.0.4</h1>
+			<h1>noQueue - v3.0.7</h1>
 		</div>
 	</div>
 </header>
@@ -63,234 +63,35 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<a href="#not-only-queue" id="not-only-queue" style="color: inherit; text-decoration: none;">
-					<h1>Not Only Queue</h1>
+					<h1>[n]OT-[o]NLY-Queue</h1>
 				</a>
-				<p>A feature rich queue with event dispatch.</p>
+				<p>noQueue is the package that extended loop and queue. It allowed you to write better code and more control to program&#39;s flow. Instead of mess up everything with <code>setTimeout()</code> or <code>setInterval()</code>, It&#39;s time for you to try better approach.</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
 				<pre><code><span class="hljs-keyword">install</span> i noqueue</code></pre>
 				<p><em>Required: Node.JS &gt;= 10.x.x</em></p>
-				<a href="#basic-usage-of-queue" id="basic-usage-of-queue" style="color: inherit; text-decoration: none;">
-					<h2>Basic usage of Queue</h2>
+				<p><strong>note</strong>: This package write in TypeScript, It&#39;s use <code>import</code>, <code>export</code> statement. If you are using this package in tranditional way, try <code>require()</code> instead.</p>
+				<a href="#components" id="components" style="color: inherit; text-decoration: none;">
+					<h2>Components</h2>
 				</a>
-				<p>We are execute functions in the queue one by one, all elements could be added and removed from queue dynamically.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> noQueue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noqueue&#x27;</span>);
-<span class="hljs-keyword">var</span> myQueue = <span class="hljs-keyword">new</span> noQueue.Queue();
-
-myQueue
-  .add(<span class="hljs-string">&#x27;job-1&#x27;</span>, <span class="hljs-keyword">async</span> (value) =&gt; {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Previous result:&#x27;</span>, value, <span class="hljs-string">&#x27;| Job 1 done&#x27;</span>);
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;J1&#x27;</span>;
-  })
-  .add(<span class="hljs-string">&#x27;job-2&#x27;</span>, <span class="hljs-keyword">async</span> (value) =&gt; {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Previous result:&#x27;</span>, value, <span class="hljs-string">&#x27;| Job 2 done&#x27;</span>);
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;J2&#x27;</span>;
-  })
-  .add(<span class="hljs-string">&#x27;job-3&#x27;</span>, <span class="hljs-keyword">async</span> (value) =&gt; {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Previous result:&#x27;</span>, value, <span class="hljs-string">&#x27;| Job 3 done&#x27;</span>);
-    <span class="hljs-keyword">if</span> (myQueue.remove(<span class="hljs-string">&#x27;job-3&#x27;</span>)) {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Job 3 was removed&#x27;</span>);
-    }
-    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;J3&#x27;</span>;
-  })
-  .start();</code></pre>
-				<p><strong>Result</strong></p>
-				<pre><code><span class="hljs-variable">Previous</span> <span class="hljs-variable"><span class="hljs-class">result</span></span>: <span class="hljs-variable">undefined</span> | <span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">1</span> <span class="hljs-variable">done</span>
-<span class="hljs-variable">Previous</span> <span class="hljs-variable"><span class="hljs-class">result</span></span>: <span class="hljs-variable">J1</span> | <span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">2</span> <span class="hljs-variable">done</span>
-<span class="hljs-variable">Previous</span> <span class="hljs-variable"><span class="hljs-class">result</span></span>: <span class="hljs-variable">J2</span> | <span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">3</span> <span class="hljs-variable">done</span>
-<span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">3</span> <span class="hljs-variable">was</span> <span class="hljs-variable">removed</span>
-<span class="hljs-variable">Previous</span> <span class="hljs-variable"><span class="hljs-class">result</span></span>: <span class="hljs-variable">J3</span> | <span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">1</span> <span class="hljs-variable">done</span>
-<span class="hljs-variable">Previous</span> <span class="hljs-variable"><span class="hljs-class">result</span></span>: <span class="hljs-variable">J1</span> | <span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">2</span> <span class="hljs-variable">done</span>
-<span class="hljs-variable">Previous</span> <span class="hljs-variable"><span class="hljs-class">result</span></span>: <span class="hljs-variable">J2</span> | <span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">1</span> <span class="hljs-variable">done</span>
-<span class="hljs-variable">Previous</span> <span class="hljs-variable"><span class="hljs-class">result</span></span>: <span class="hljs-variable">J1</span> | <span class="hljs-variable"><span class="hljs-class">Job</span></span> <span class="hljs-number">2</span> <span class="hljs-variable">done</span></code></pre>
-				<a href="#basic-usage-of-eventdispatcher" id="basic-usage-of-eventdispatcher" style="color: inherit; text-decoration: none;">
-					<h2>Basic usage of EventDispatcher</h2>
+				<p>For more detail please access our document: <a href="https://chiro-hiro.github.io/noqueue/">noQueue Document</a></p>
+				<ul>
+					<li>QueueLoop: Infinity loop with builtin queue for jobs</li>
+					<li>ParallelLoop: Infinity loop with parallel trigger mechanism</li>
+					<li>Common: Common interface and data type</li>
+					<li>Utilities<ul>
+							<li>First: Invoke all jobs at once and take result of fastest response</li>
+							<li>Fill: Awaiting for all jobs to be fulfilled</li>
+							<li>TillSuccess: Keep retries till job success</li>
+							<li>AwaitSleep: Just do nothing and wait for a moment</li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
 				</a>
-				<p>Event dispatcher is able to transfer event and its data to listener.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> noQueue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noqueue&#x27;</span>);
-<span class="hljs-keyword">var</span> eventHadler = <span class="hljs-keyword">new</span> noQueue.EventDispatcher();
-
-eventHadler
-  .on(<span class="hljs-string">&#x27;test&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;on-test&#x27;</span>, data);
-  })
-  .once(<span class="hljs-string">&#x27;test&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;once-test&#x27;</span>, data);
-  });
-
-<span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> {
-  eventHadler.emit(<span class="hljs-string">&#x27;test&#x27;</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>]);
-}, <span class="hljs-number">1000</span>);</code></pre>
-				<p><strong>Result</strong></p>
-				<pre><code>on-test [ <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span> ]
-once-test [ <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span> ]
-on-test [ <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span> ]
-on-test [ <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span> ]
-on-test [ <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span> ]</code></pre>
-				<a href="#advance-usage-and-combination" id="advance-usage-and-combination" style="color: inherit; text-decoration: none;">
-					<h2>Advance usage and combination</h2>
-				</a>
-				<p>There are many ways to trigger events and <code>Queue</code> is perform failover, our program won&#39;t stuck or stop by error.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> noQueue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noqueue&#x27;</span>);
-<span class="hljs-keyword">var</span> myQueue = <span class="hljs-keyword">new</span> noQueue.Queue();
-
-myQueue
-  .on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&#x27;Found error:&#x27;</span>, err);
-  }).on(<span class="hljs-string">&#x27;job-1-done&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, data</span>) </span>{
-    <span class="hljs-built_in">console</span>.info(name, data);
-  }).on(<span class="hljs-string">&#x27;job-2-done&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name, data</span>) </span>{
-    <span class="hljs-built_in">console</span>.info(name, data)
-  });
-
-myQueue
-  .add(<span class="hljs-string">&#x27;job-1&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
-    myQueue.emit(<span class="hljs-string">&#x27;job-1-done&#x27;</span>, <span class="hljs-string">&#x27;Name: Job 1&#x27;</span>, { <span class="hljs-attr">data</span>: <span class="hljs-string">&quot;job 1 data&quot;</span> });
-  })
-  .add(<span class="hljs-string">&#x27;job-2&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">100</span>) % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) {
-      <span class="hljs-keyword">return</span> {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;job-2-done&#x27;</span>,
-        <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;Name: Job 2&#x27;</span>, { <span class="hljs-attr">data</span>: <span class="hljs-string">&quot;job 2 data&quot;</span> }]
-      };
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Unexpected error happend&#x27;</span>);
-    }
-  })
-  .start();</code></pre>
-				<p><strong>Result</strong></p>
-				<pre><code><span class="hljs-attr">Name:</span> Job <span class="hljs-number">1</span> { <span class="hljs-attr">data:</span> <span class="hljs-string">&#x27;job 1 data&#x27;</span> }
-Found <span class="hljs-attr">error:</span> <span class="hljs-attr">Error:</span> Unexpected error happend
-    at myQueue.add.add (<span class="hljs-regexp">/home/</span>chirohiro<span class="hljs-regexp">/Gits/</span>chiro-hiro/test2.<span class="hljs-attr">js:</span><span class="hljs-number">24</span>:<span class="hljs-number">13</span>)
-    at Queue.worker (<span class="hljs-regexp">/home/</span>chirohiro<span class="hljs-regexp">/Gits/</span>chiro-hiro<span class="hljs-regexp">/noqueue/</span>built/queue.<span class="hljs-attr">js:</span><span class="hljs-number">80</span>:<span class="hljs-number">22</span>)
-    at Timeout._self.handler.setTimeout [<span class="hljs-keyword">as</span> _onTimeout] (<span class="hljs-regexp">/home/</span>chirohiro<span class="hljs-regexp">/Gits/</span>chiro-hiro<span class="hljs-regexp">/noqueue/</span>built/queue.<span class="hljs-attr">js:</span><span class="hljs-number">97</span>:<span class="hljs-number">34</span>)
-    at ontimeout (timers.<span class="hljs-attr">js:</span><span class="hljs-number">436</span>:<span class="hljs-number">11</span>)
-    at tryOnTimeout (timers.<span class="hljs-attr">js:</span><span class="hljs-number">300</span>:<span class="hljs-number">5</span>)
-    at listOnTimeout (timers.<span class="hljs-attr">js:</span><span class="hljs-number">263</span>:<span class="hljs-number">5</span>)
-    at Timer.processTimers (timers.<span class="hljs-attr">js:</span><span class="hljs-number">223</span>:<span class="hljs-number">10</span>)
-<span class="hljs-attr">Name:</span> Job <span class="hljs-number">1</span> { <span class="hljs-attr">data:</span> <span class="hljs-string">&#x27;job 1 data&#x27;</span> }
-<span class="hljs-attr">Name:</span> Job <span class="hljs-number">2</span> { <span class="hljs-attr">data:</span> <span class="hljs-string">&#x27;job 2 data&#x27;</span> }</code></pre>
-				<a href="#run-tasks-in-clusters" id="run-tasks-in-clusters" style="color: inherit; text-decoration: none;">
-					<h2>Run tasks in clusters</h2>
-				</a>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> noQueue = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noqueue&#x27;</span>);
-<span class="hljs-keyword">let</span> clusterService = <span class="hljs-keyword">new</span> noQueue.ClusterService()
-
-clusterService.add(<span class="hljs-string">&#x27;express1&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
-    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Express 1&#x27;</span>);
-      resolve();
-    }, <span class="hljs-number">20000</span>);
-  });
-}, <span class="hljs-number">1000</span>);
-
-clusterService.add(<span class="hljs-string">&#x27;express2&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Express 2&#x27;</span>);
-});
-
-clusterService.on(<span class="hljs-string">&#x27;success&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Success execute:&#x27;</span>, name);
-}).on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Got error:&#x27;</span>, error);
-})
-
-clusterService.start();</code></pre>
-				<p><strong>Result</strong></p>
-				<pre><code>Express 2
-Success <span class="hljs-keyword">execute</span>: express2
-Got <span class="hljs-keyword">error</span>: [express1] <span class="hljs-keyword">Child</span> process <span class="hljs-keyword">timeout</span> - <span class="hljs-keyword">Error</span>: <span class="hljs-keyword">Child</span> process <span class="hljs-keyword">timeout</span>
-    <span class="hljs-keyword">at</span> Timeout.setTimeout [<span class="hljs-keyword">as</span> _onTimeout] (/home/chirohiro/Gits/chiro-hiro/<span class="hljs-keyword">test</span>/node_modules/noqueue/built/service-cluster.js:<span class="hljs-number">84</span>:<span class="hljs-number">45</span>)
-    <span class="hljs-keyword">at</span> ontimeout (timers.js:<span class="hljs-number">436</span>:<span class="hljs-number">11</span>)
-    <span class="hljs-keyword">at</span> tryOnTimeout (timers.js:<span class="hljs-number">300</span>:<span class="hljs-number">5</span>)
-    <span class="hljs-keyword">at</span> listOnTimeout (timers.js:<span class="hljs-number">263</span>:<span class="hljs-number">5</span>)
-    <span class="hljs-keyword">at</span> Timer.processTimers (timers.js:<span class="hljs-number">223</span>:<span class="hljs-number">10</span>)
-Express <span class="hljs-number">2</span>
-<span class="hljs-keyword">Success</span> <span class="hljs-keyword">execute</span>: express2
-Express <span class="hljs-number">2</span>
-<span class="hljs-keyword">Success</span> <span class="hljs-keyword">execute</span>: express2
-Got <span class="hljs-keyword">error</span>: [express1] <span class="hljs-keyword">Child</span> process <span class="hljs-keyword">timeout</span> - <span class="hljs-keyword">Error</span>: <span class="hljs-keyword">Child</span> process <span class="hljs-keyword">timeout</span>
-    <span class="hljs-keyword">at</span> Timeout.setTimeout [<span class="hljs-keyword">as</span> _onTimeout] (/home/chirohiro/Gits/chiro-hiro/<span class="hljs-keyword">test</span>/node_modules/noqueue/built/service-cluster.js:<span class="hljs-number">84</span>:<span class="hljs-number">45</span>)
-    <span class="hljs-keyword">at</span> ontimeout (timers.js:<span class="hljs-number">436</span>:<span class="hljs-number">11</span>)
-    <span class="hljs-keyword">at</span> tryOnTimeout (timers.js:<span class="hljs-number">300</span>:<span class="hljs-number">5</span>)
-    <span class="hljs-keyword">at</span> listOnTimeout (timers.js:<span class="hljs-number">263</span>:<span class="hljs-number">5</span>)
-    <span class="hljs-keyword">at</span> Timer.processTimers (timers.js:<span class="hljs-number">223</span>:<span class="hljs-number">10</span>)</code></pre>
-				<p>const testQueue = new QueueLoop();</p>
-				<p>testQueue
-					.add(
-					&#39;job-1&#39;,
-					async () =&gt; {
-					return [&#39;Chiro&#39;, 32, &#39;chiro8x@gmail.com&#39;];
-					},
-					TimeDuration.fromSecond(2),
-					)
-					.add(
-					&#39;job-2&#39;,
-					async (name: string, age: number, email: string) =&gt; {
-					console.log(&#39;Processing job-1 with input params:&#39;, { name, age, email });
-					return { firstName: &#39;Chiro&#39;, lastName: &#39;Hiro&#39; };
-					},
-					TimeDuration.fromSecond(2),
-					)
-					.add(
-					&#39;job-3&#39;,
-					async () =&gt; {
-					throw new Error(&#39;This an annoying error&#39;);
-					},
-					TimeDuration.fromSecond(2),
-				);</p>
-				<p>testQueue.on(&#39;success&#39;, (eventName, ...params: any[]) =&gt; {
-					console.log(<code>Event ${eventName} completed with result:</code>, params);
-				});</p>
-				<p>testQueue.on(&#39;error&#39;, (eventName, error) =&gt; {
-					console.log(<code>Event ${eventName} failed with error:</code>, error);
-				});</p>
-				<p>testQueue.start();</p>
-				<p>const a = new TimeDuration();
-				a.setHour(14).setMinute(25).setSecond(121).setMillisecond(800);</p>
-				<p>const b = new TimeDuration();
-				b.setHour(2).setMinute(50).setSecond(59).setMillisecond(400);</p>
-				<p>process.stdout.write(<code>${a.toString()}\n${b.toString()}\n${a.add(b).toString()}\n</code>);</p>
-				<p>export function sleepRandom(str: string) {
-					// eslint-disable-next-line no-bitwise
-					const rand = (1 + Math.random() * 4) &gt;&gt;&gt; (0 + 1);
-					return new Promise((resolve, reject) =&gt; {
-					setTimeout(() =&gt; {
-					if (rand % 2 === 1) {
-					resolve(str);
-					} else {
-					reject(new Error(str));
-					}
-					}, rand * 1000);
-					});
-				}</p>
-				<p>TillSuccess(async () =&gt; {
-					return sleepRandom(&#39;Hello&#39;);
-				});</p>
-				<p>const testQueue = new ParallelLoop();</p>
-				<p>testQueue
-					.add(
-					&#39;job-1&#39;,
-					async () =&gt; {
-					return [&#39;Chiro&#39;, 32, &#39;chiro8x@gmail.com&#39;];
-					},
-					TimeDuration.fromSecond(5),
-					)
-					.add(
-					&#39;job-2&#39;,
-					async () =&gt; {
-					return { firstName: &#39;Chiro&#39;, lastName: &#39;Hiro&#39; };
-					},
-					TimeDuration.fromSecond(1),
-					);
-					testQueue.on(&#39;success&#39;, (eventName, ...params: any[]) =&gt; {
-					console.log(<code>Event ${eventName} completed with result:</code>, params);
-				});</p>
-				<p>testQueue.on(&#39;error&#39;, (eventName, error) =&gt; {
-					console.log(<code>Event ${eventName} failed with error:</code>, error);
-				});</p>
-				<p>testQueue.start();</p>
+				<p>This package was liscensed under <a href="https://github.com/chiro-hiro/noqueue/blob/develop/LICENSE">MIT License</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

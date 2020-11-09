@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>QueueLoop | noQueue - v3.0.4</title>
-	<meta name="description" content="Documentation for noQueue - v3.0.4">
+	<title>QueueLoop | noQueue - v3.0.7</title>
+	<meta name="description" content="Documentation for noQueue - v3.0.7">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">noQueue - v3.0.4</a>
+					<a href="../index.html" class="title">noQueue - v3.0.7</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -73,7 +73,62 @@
 						<a href="#introduction" id="introduction" style="color: inherit; text-decoration: none;">
 							<h2>Introduction</h2>
 						</a>
-						<p>Queue Loop</p>
+						<p><a href="infinity_loop.queueloop.html">QueueLoop</a> allowed you do jobs by sequence and repeate them just one by one till the loop was stopped by invoke <a href="infinity_loop.queueloop.html#stop">QueueLoop.stop</a></p>
+						<a href="#example-code" id="example-code" style="color: inherit; text-decoration: none;">
+							<h3>Example code</h3>
+						</a>
+						<p>We add three jobs to the queue and start processing.</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">import</span> { QueueLoop, TimeDuration } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;noqueue&#x27;</span>;
+
+<span class="hljs-keyword">const</span> iQueueLoop = <span class="hljs-keyword">new</span> QueueLoop();
+
+iQueueLoop
+  .add(
+    <span class="hljs-string">&#x27;job-1&#x27;</span>,
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">return</span> [<span class="hljs-string">&#x27;job-1-result&#x27;</span>];
+    },
+    TimeDuration.fromSecond(<span class="hljs-number">2</span>), <span class="hljs-comment">// After job-1 is done, wait for 2 seconds</span>
+  )
+  .add(
+    <span class="hljs-string">&#x27;job-2&#x27;</span>,
+    <span class="hljs-keyword">async</span> (job1Result: <span class="hljs-built_in">string</span>) =&gt; {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Processing job-1 with input params:&#x27;</span>, { job1Result });
+    },
+    TimeDuration.fromSecond(<span class="hljs-number">10</span>), <span class="hljs-comment">// After job-1 is done, wait for 10 seconds</span>
+  )
+  .add(
+    <span class="hljs-string">&#x27;job-3&#x27;</span>,
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;This an annoying error&#x27;</span>);
+    },
+    TimeDuration.fromSecond(<span class="hljs-number">2</span>), <span class="hljs-comment">// After job-3 is done, wait for 2 seconds</span>
+  );
+
+<span class="hljs-comment">// Listent on success event</span>
+iQueueLoop.on(<span class="hljs-string">&#x27;success&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">eventName, ...params: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Event <span class="hljs-subst">${eventName}</span> completed with result:`</span>, params);
+});
+
+<span class="hljs-comment">// Listent on error event</span>
+iQueueLoop.on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">eventName, error</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Event <span class="hljs-subst">${eventName}</span> failed with error:`</span>, error);
+});
+
+iQueueLoop.start();</code></pre>
+						<p>Here are the result:</p>
+						<pre><code>Event job-1 completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ <span class="hljs-string">&#x27;job-1-result&#x27;</span> ]
+Processing job<span class="hljs-number">-1</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">input</span> params: { job1Result: <span class="hljs-string">&#x27;job-1-result&#x27;</span> }
+<span class="hljs-keyword">Event</span> job<span class="hljs-number">-2</span> completed <span class="hljs-keyword">with</span> <span class="hljs-keyword">result</span>: [ undefined ]
+<span class="hljs-keyword">Event</span> job<span class="hljs-number">-3</span> <span class="hljs-keyword">failed</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">error</span>: <span class="hljs-keyword">Error</span>: This an annoying <span class="hljs-keyword">error</span>
+    <span class="hljs-keyword">at</span> testQueue.add.add.add (/home/<span class="hljs-keyword">user</span>/gits/noqueue/test4.ts:<span class="hljs-number">23</span>:<span class="hljs-number">13</span>)
+    <span class="hljs-keyword">at</span> QueueLoop.worker (/home/<span class="hljs-keyword">user</span>/gits/noqueue/src/queue-loop.ts:<span class="hljs-number">195</span>:<span class="hljs-number">5</span>)
+    <span class="hljs-keyword">at</span> Timeout.handler.setTimeout [<span class="hljs-keyword">as</span> _onTimeout] (/home/<span class="hljs-keyword">user</span>/gits/noqueue/src/queue-loop.ts:<span class="hljs-number">210</span>:<span class="hljs-number">20</span>)
+    <span class="hljs-keyword">at</span> ontimeout (timers.js:<span class="hljs-number">436</span>:<span class="hljs-number">11</span>)
+    <span class="hljs-keyword">at</span> tryOnTimeout (timers.js:<span class="hljs-number">300</span>:<span class="hljs-number">5</span>)
+    <span class="hljs-keyword">at</span> listOnTimeout (timers.js:<span class="hljs-number">263</span>:<span class="hljs-number">5</span>)
+    <span class="hljs-keyword">at</span> Timer.processTimers (timers.js:<span class="hljs-number">223</span>:<span class="hljs-number">10</span>)</code></pre>
+						<p>Even there are an error, it won&#39;t break the loop. <a href="infinity_loop.queueloop.html">QueueLoop</a> is just keep moving on.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>export</dt>
@@ -146,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in queue-loop.ts:90</li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L90">queue-loop.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -183,7 +238,7 @@
 					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;error&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in queue-loop.ts:90</li>
+							<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L90">queue-loop.ts:90</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -205,7 +260,7 @@
 					<div class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;success&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in queue-loop.ts:82</li>
+							<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L82">queue-loop.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -234,7 +289,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in queue-loop.ts:128</li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L128">queue-loop.ts:128</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -280,7 +335,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#catch">catch</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L56">event-dispatcher.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L56">event-dispatcher.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -317,7 +372,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#emit">emit</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L155">event-dispatcher.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L155">event-dispatcher.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -360,7 +415,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#eventnames">eventNames</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L85">event-dispatcher.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L85">event-dispatcher.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -388,7 +443,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in queue-loop.ts:116</li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L116">queue-loop.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -415,7 +470,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in queue-loop.ts:107</li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L107">queue-loop.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -443,7 +498,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#on">on</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L124">event-dispatcher.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L124">event-dispatcher.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -486,7 +541,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#once">once</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L143">event-dispatcher.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L143">event-dispatcher.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,7 +584,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#reject">reject</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L76">event-dispatcher.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L76">event-dispatcher.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -565,7 +620,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in queue-loop.ts:146</li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L146">queue-loop.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -602,7 +657,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#removealllisteners">removeAllListeners</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L104">event-dispatcher.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L104">event-dispatcher.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -639,7 +694,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#resolve">resolve</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L66">event-dispatcher.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L66">event-dispatcher.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -675,7 +730,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in queue-loop.ts:223</li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L223">queue-loop.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -702,7 +757,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in queue-loop.ts:236</li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/queue-loop.ts#L236">queue-loop.ts:236</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -730,7 +785,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="common.eventdispatcher.html">EventDispatcher</a>.<a href="common.eventdispatcher.html#then">then</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/event-dispatcher.ts#L46">event-dispatcher.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/d88fc16/src/event-dispatcher.ts#L46">event-dispatcher.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
