@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2018",
     "module": "commonjs",
     "strict": true,
     "moduleResolution": "node",
@@ -11,16 +11,12 @@
     "preserveConstEnums": true,
     "declaration": true,
     "outDir": "./built/",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*",
-    "index.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  "typedocOptions": {
+    "mode": "modules",
+    "out": "docs"
+  },
+  "include": ["src/**/*", "index.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -1,0 +1,19 @@
+{
+  "inputFiles": [
+    "./src/queue-loop.ts",
+    "./src/parallel-loop.ts",
+    "./src/utilities.ts",
+    "./src/time-duration.ts",
+    "./src/event-dispatcher.ts",
+    "./src/common.ts"
+  ],
+  "mode": "modules",
+  "exclude": " **/node_modules/**",
+  "plugin": ["typedoc-plugin-external-module-name"],
+  "excludePrivate": true,
+  "excludeNotExported": true,
+  "out": "docs",
+  "name": "noQueue",
+  "includes": "./inc/",
+  "includeVersion": true
+}
