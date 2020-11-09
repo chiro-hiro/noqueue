@@ -18,7 +18,7 @@ export class ParallelLoop extends EventDispatcher {
   private config: IConfiguration = { paddingTime: 100 };
 
   /**
-   * Job pool
+   * Jobs's pool
    * @private
    * @type {{ [key: string]: IParallelFunction }}
    * @memberof ParallelLoop
@@ -26,7 +26,7 @@ export class ParallelLoop extends EventDispatcher {
   private pool: { [key: string]: IParallelFunction } = {};
 
   /**
-   * Job sorted by time ordering
+   * Jobs sorted by time ordering
    * @private
    * @type {string[]}
    * @memberof ParallelLoop
@@ -34,7 +34,7 @@ export class ParallelLoop extends EventDispatcher {
   private order: string[] = [];
 
   /**
-   * Job lock to make sure there are no overlap
+   * Job's lock to make sure there are no overlap
    * @private
    * @type {{ [key: string]: boolean }}
    * @memberof ParallelLoop
@@ -74,7 +74,7 @@ export class ParallelLoop extends EventDispatcher {
   private counter: number = 0;
 
   /**
-   * Manager timeout handler id
+   * Manage timeout handler id
    * @private
    * @type {any}
    * @memberof ParallelLoop
@@ -100,7 +100,7 @@ export class ParallelLoop extends EventDispatcher {
   }
 
   /**
-   * Add job in to pool
+   * Add job into pool
    * @param {string} name Name of job
    * @param {IParallelFunction} func Function that will be triggered
    * @param {TimeDuration} paddingTimeTime Padding time between executions

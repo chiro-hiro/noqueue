@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>noQueue - v3.0.8</title>
-	<meta name="description" content="Documentation for noQueue - v3.0.8">
+	<title>noQueue - v3.0.10</title>
+	<meta name="description" content="Documentation for noQueue - v3.0.10">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">noQueue - v3.0.8</a>
+					<a href="index.html" class="title">noQueue - v3.0.10</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>noQueue - v3.0.8</h1>
+			<h1>noQueue - v3.0.10</h1>
 		</div>
 	</div>
 </header>
@@ -65,33 +65,34 @@
 				<a href="#not-only-queue" id="not-only-queue" style="color: inherit; text-decoration: none;">
 					<h1>[n]OT [o]NLY Queue</h1>
 				</a>
-				<p>noQueue is the package that extended loop and queue. It allowed you to write better code and more control to program&#39;s flow. Instead of mess up everything with <code>setTimeout()</code> or <code>setInterval()</code>, It&#39;s time for you to try better approach.</p>
+				<p>noQueue is the package that extended loop and queue. It allowed you to write better code and give you more control. Instead of mess up everything by using <code>setTimeout()</code> or <code>setInterval()</code>, we offered a single instance of an <strong>Infinity Loop</strong> and <strong>Event Driven Pattern</strong>. Let&#39;s give it a try !!.</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
 				<pre><code><span class="hljs-keyword">install</span> i noqueue</code></pre>
 				<p><em>Required: Node.JS &gt;= 10.x.x</em></p>
-				<p><strong>note</strong>: This package write in TypeScript, It&#39;s use <code>import</code>, <code>export</code> statement. If you are using this package in tranditional way, try <code>require()</code> instead.</p>
+				<p><strong>note</strong>: This package was wrote in TypeScript and it support <a href="https://nodejs.org/dist/latest-v14.x/docs/api/esm.html">ECMAScript Modules</a> that&#39;s why all examples are using <code>import</code>, <code>export</code> statement. If you are using <a href="https://nodejs.org/dist/latest-v14.x/docs/api/modules.html">CommonJS Modules</a>, try <code>require()</code> instead.</p>
 				<a href="#components" id="components" style="color: inherit; text-decoration: none;">
 					<h2>Components</h2>
 				</a>
-				<p>For more detail please access our document: <a href="https://chiro-hiro.github.io/noqueue/">noQueue Document</a></p>
+				<p>For more detail please check our document: <a href="https://chiro-hiro.github.io/noqueue/">noQueue Document</a></p>
 				<ul>
-					<li>QueueLoop: Infinity loop with builtin queue for jobs</li>
-					<li>ParallelLoop: Infinity loop with parallel trigger mechanism</li>
-					<li>Common: Common interface and data type</li>
-					<li>Utilities<ul>
-							<li>First: Invoke all jobs at once and take result of fastest response</li>
-							<li>Fill: Awaiting for all jobs to be fulfilled</li>
-							<li>TillSuccess: Keep retries till job success</li>
-							<li>AwaitSleep: Just do nothing and wait for a moment</li>
+					<li><strong>QueueLoop:</strong> Infinity loop with builtin queue to manage and execute jobs by sequence</li>
+					<li><strong>ParallelLoop:</strong> Infinity loop with parallel trigger mechanism</li>
+					<li><strong>Common:</strong> Common interface and data type</li>
+					<li><strong>Utilities:</strong><ul>
+							<li><strong>First:</strong> Invoke all jobs at once and take the result from the fastest response</li>
+							<li><strong>Fill:</strong> Awaiting for all jobs to be fulfilled, all result and error will be listed in array</li>
+							<li><strong>TillSuccess:</strong> Keep retries till the giving job is successful</li>
+							<li><strong>AwaitSleep:</strong> Just do nothing and wait for a moment</li>
 						</ul>
 					</li>
 				</ul>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>
 				</a>
-				<p>This package was liscensed under <a href="https://github.com/chiro-hiro/noqueue/blob/develop/LICENSE">MIT License</a></p>
+				<p>This package was licensed under <a href="https://github.com/chiro-hiro/noqueue/blob/develop/LICENSE">MIT License</a></p>
+				<p><em>built with ❤️</em></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
