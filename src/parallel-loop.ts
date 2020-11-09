@@ -209,14 +209,11 @@ export class ParallelLoop extends EventDispatcher {
    * @memberof ParallelLoop
    */
   public start(): boolean {
-    if (this.stopped) {
-      clearTimeout(this.handler);
-      this.handler = null;
-      this.stopped = false;
-      this.worker();
-      return true;
-    }
-    return false;
+    clearTimeout(this.handler);
+    this.handler = null;
+    this.stopped = false;
+    this.worker();
+    return true;
   }
 
   /**
@@ -225,14 +222,11 @@ export class ParallelLoop extends EventDispatcher {
    * @memberof ParallelLoop
    */
   public stop(): boolean {
-    if (!this.stopped) {
-      clearTimeout(this.handler);
-      this.handler = null;
-      this.stopped = true;
-      this.counter = 0;
-      return true;
-    }
-    return false;
+    clearTimeout(this.handler);
+    this.handler = null;
+    this.stopped = true;
+    this.counter = 0;
+    return true;
   }
 }
 

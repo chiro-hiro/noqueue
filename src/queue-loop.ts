@@ -221,14 +221,11 @@ export class QueueLoop extends EventDispatcher {
    * @memberof QueueLoop
    */
   public start(): boolean {
-    if (this.stopped) {
-      clearTimeout(this.handler);
-      this.handler = null;
-      this.stopped = false;
-      this.worker();
-      return true;
-    }
-    return false;
+    clearTimeout(this.handler);
+    this.handler = null;
+    this.stopped = false;
+    this.worker();
+    return true;
   }
 
   /**
@@ -237,14 +234,11 @@ export class QueueLoop extends EventDispatcher {
    * @memberof QueueLoop
    */
   public stop(): boolean {
-    if (this.stopped) {
-      clearTimeout(this.handler);
-      this.stopped = true;
-      this.handler = null;
-      this.counter = 0;
-      return true;
-    }
-    return false;
+    clearTimeout(this.handler);
+    this.stopped = true;
+    this.handler = null;
+    this.counter = 0;
+    return true;
   }
 }
 
