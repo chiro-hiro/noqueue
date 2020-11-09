@@ -1,12 +1,18 @@
-import { EventDispatcher } from './event-dispatcher'
-import { TimeSchedule, toTimestamp } from './utilities'
-import { Queue } from './queue'
-import { ClusterService } from './service-cluster'
+import { First, WaitSleep, TillSuccess, Fill } from './utilities';
+import { EventDispatcher } from './event-dispatcher';
+import { QueueLoop } from './queue-loop';
+import { ParallelLoop } from './parallel-loop';
+import { TimeDuration } from './time-duration';
 
-export {
-  TimeSchedule as TimeSchedule,
-  EventDispatcher as EventDispatcher,
-  toTimestamp as toTimestamp,
-  Queue as Queue,
-  ClusterService as ClusterService
-}
+export * from './common';
+
+export { EventDispatcher, QueueLoop, ParallelLoop, TimeDuration };
+
+export default { EventDispatcher, QueueLoop, ParallelLoop, TimeDuration };
+
+export const Utilities = {
+  First,
+  WaitSleep,
+  TillSuccess,
+  Fill,
+};
