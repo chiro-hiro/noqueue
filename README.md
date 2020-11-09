@@ -1,4 +1,4 @@
-# [n]OT-[o]NLY-Queue
+# [n]OT [o]NLY Queue
 
 noQueue is the package that extended loop and queue. It allowed you to write better code and more control to program's flow. Instead of mess up everything with `setTimeout()` or `setInterval()`, It's time for you to try better approach.
 
