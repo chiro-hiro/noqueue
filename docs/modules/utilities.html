@@ -1,0 +1,396 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Utilities | noQueue - v3.0.4</title>
+	<meta name="description" content="Documentation for noQueue - v3.0.4">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">noQueue - v3.0.4</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="utilities.html">Utilities</a>
+				</li>
+			</ul>
+			<h1>Module Utilities</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utilities.html#fill" class="tsd-kind-icon">Fill</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utilities.html#first" class="tsd-kind-icon">First</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="utilities.html#tillsuccess" class="tsd-kind-icon">Till<wbr>Success</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utilities.html#waitsleep" class="tsd-kind-icon">Wait<wbr>Sleep</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="fill" class="tsd-anchor"></a>
+					<h3>Fill</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">Fill<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>asyncFunctions<span class="tsd-signature-symbol">: </span><a href="common.html#iqueuefunction" class="tsd-signature-type">IQueueFunction</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/common.ifillresult.html" class="tsd-signature-type">IFillResult</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/utilities.ts#L11">utilities.ts:11</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Start everything at the same time,
+									It will return and array of <a href="../interfaces/common.ifillresult.html">IFillResult</a></p>
+									<a href="#fill-guide" id="fill-guide" style="color: inherit; text-decoration: none;">
+										<h3>.Fill() Guide</h3>
+									</a>
+									<p>We will use this code to simulate an heavy task:</p>
+									<pre><code class="language-ts"><span class="hljs-comment">/**
+ * We simulate a heavy task
+ * <span class="hljs-doctag">@template <span class="hljs-variable">T</span></span>
+ * <span class="hljs-doctag">@param <span class="hljs-type">{T}</span> <span class="hljs-variable">i</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{*}</span>  <span class="hljs-type">{Promise&lt;T&gt;}</span></span>
+ */</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">heavyTask</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">i: T</span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+  <span class="hljs-keyword">const</span> r = <span class="hljs-number">1</span> + <span class="hljs-built_in">Math</span>.round(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">9</span>);
+  <span class="hljs-comment">// Sleep for a random duration</span>
+  <span class="hljs-keyword">await</span> Utilities.WaitSleep(r * <span class="hljs-number">500</span>);
+  <span class="hljs-keyword">if</span> (r % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> i;
+  }
+  <span class="hljs-comment">// Throw error if r is odd</span>
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Unexpected result&#x27;</span>);
+}</code></pre>
+									<p><a href="utilities.html#fill">Utilities.Fill</a> will be used to perform many tasks at the same time but you can&#39;t sure about its result.</p>
+									<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Utilities } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./src/index&#x27;</span>;
+
+(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> Utilities.Fill(
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;First&#x27;</span>);
+    },
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;Second&#x27;</span>);
+    },
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;Third&#x27;</span>);
+    },
+  );
+
+  <span class="hljs-built_in">console</span>.log(result);
+})();</code></pre>
+									<p>Result:</p>
+									<pre><code>[ { <span class="hljs-attr">success:</span> <span class="hljs-literal">true</span>, <span class="hljs-attr">result:</span> <span class="hljs-string">&#x27;First&#x27;</span> },
+  { <span class="hljs-attr">success:</span> <span class="hljs-literal">false</span>,
+    <span class="hljs-symbol">result:</span>
+     <span class="hljs-symbol">Error:</span> Unexpected result
+         at sleepRandom (<span class="hljs-regexp">/home/</span>chiro<span class="hljs-regexp">/gits/</span>chiro-hiro<span class="hljs-regexp">/noqueue/</span>test1.<span class="hljs-attr">ts:</span><span class="hljs-number">9</span>:<span class="hljs-number">9</span>) },
+  { <span class="hljs-attr">success:</span> <span class="hljs-literal">true</span>, <span class="hljs-attr">result:</span> <span class="hljs-string">&#x27;Third&#x27;</span> } ]</code></pre>
+									<p>Results of all given functions will be appeared after all promises are fulfilled.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>export</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>asyncFunctions: <a href="common.html#iqueuefunction" class="tsd-signature-type">IQueueFunction</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Async function that will be added</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/common.ifillresult.html" class="tsd-signature-type">IFillResult</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="first" class="tsd-anchor"></a>
+					<h3>First</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">First<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>asyncFunctions<span class="tsd-signature-symbol">: </span><a href="common.html#iqueuefunction" class="tsd-signature-type">IQueueFunction</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/utilities.ts#L38">utilities.ts:38</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>It&#39;s a race, we&#39;re only take the first result.
+									In case, every racer was failed we return last error</p>
+									<a href="#first-guide" id="first-guide" style="color: inherit; text-decoration: none;">
+										<h3>.First() Guide</h3>
+									</a>
+									<p><a href="utilities.html#first">Utilities.First</a> could be use for the same task to get the result as soon as possible.</p>
+									<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Utilities } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./src/index&#x27;</span>;
+
+(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> Utilities.First(
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;First&#x27;</span>);
+    },
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;Second&#x27;</span>);
+    },
+    <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;Third&#x27;</span>);
+    },
+  );
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;The fastest is:&#x27;</span>, result);
+})();</code></pre>
+									<p>Result:</p>
+									<pre><code>The fastest <span class="hljs-keyword">is</span>: <span class="hljs-built_in">Second</span></code></pre>
+									<p>As you see, we have one winner here. If there are an <code>Error</code>, It&#39;s fine too that meant all tasks were failed.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>export</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>asyncFunctions: <a href="common.html#iqueuefunction" class="tsd-signature-type">IQueueFunction</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Async function that will be added</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="tillsuccess" class="tsd-anchor"></a>
+					<h3>Till<wbr>Success</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">Till<wbr>Success&lt;T&gt;<span class="tsd-signature-symbol">(</span>asyncFunction<span class="tsd-signature-symbol">: </span><a href="common.html#iqueuefunction" class="tsd-signature-type">IQueueFunction</a>, paddingTime<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, retries<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/utilities.ts#L80">utilities.ts:80</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Try an async function several times till it&#39;s successful</p>
+									<a href="#tillsuccess-example" id="tillsuccess-example" style="color: inherit; text-decoration: none;">
+										<h3>.TillSuccess() Example</h3>
+									</a>
+									<p><a href="utilities.html#tillsuccess">Utilities.TillSuccess</a> could be used to guarantee your request or data reach target.</p>
+									<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Utilities } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./src/index&#x27;</span>;
+
+(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">let</span> tried = <span class="hljs-number">0</span>;
+  <span class="hljs-comment">// Retries heavy task each 2 second, max retries are 5 times</span>
+  <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> Utilities.TillSuccess(<span class="hljs-keyword">async</span> () =&gt; {
+    tried += <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Trying <span class="hljs-subst">${tried}</span> time(s)`</span>);
+    <span class="hljs-keyword">return</span> heavyTask(<span class="hljs-string">&#x27;Yes&#x27;</span>);
+  }, <span class="hljs-number">2000</span>, <span class="hljs-number">5</span>);
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Was it successful?&#x27;</span>, result);
+})();</code></pre>
+									<p>Result:</p>
+									<pre><code><span class="hljs-string">Trying</span> <span class="hljs-number">1</span> <span class="hljs-string">time(s)</span>
+<span class="hljs-string">Trying</span> <span class="hljs-number">2</span> <span class="hljs-string">time(s)</span>
+<span class="hljs-string">Was</span> <span class="hljs-string">it</span> <span class="hljs-string">successful?</span> <span class="hljs-literal">Yes</span></code></pre>
+									<p>If we&#39;re fail all the times, an <code>Error</code> will be threw.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>export</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>Could be any kind of data</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>asyncFunction: <a href="common.html#iqueuefunction" class="tsd-signature-type">IQueueFunction</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Function need to be retried</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> paddingTime: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1000</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> retries: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 3</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="waitsleep" class="tsd-anchor"></a>
+					<h3>Wait<wbr>Sleep</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">Wait<wbr>Sleep<span class="tsd-signature-symbol">(</span>duration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chiro-hiro/noqueue/blob/8760eb9/src/utilities.ts#L66">utilities.ts:66</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sleep for a wait</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>export</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>duration: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Duration in milliseconds</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="common.html">Common</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="infinity_loop.html">Infinity <wbr>Loop</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="utilities.html">Utilities</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="utilities.html#fill" class="tsd-kind-icon">Fill</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="utilities.html#first" class="tsd-kind-icon">First</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="utilities.html#tillsuccess" class="tsd-kind-icon">Till<wbr>Success</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="utilities.html#waitsleep" class="tsd-kind-icon">Wait<wbr>Sleep</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

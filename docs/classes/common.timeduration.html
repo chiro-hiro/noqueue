@@ -1,0 +1,1051 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TimeDuration | noQueue - v3.0.4</title>
+	<meta name="description" content="Documentation for noQueue - v3.0.4">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">noQueue - v3.0.4</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/common.html">Common</a>
+				</li>
+				<li>
+					<a href="common.timeduration.html">TimeDuration</a>
+				</li>
+			</ul>
+			<h1>Class TimeDuration</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<a href="#introduction" id="introduction" style="color: inherit; text-decoration: none;">
+							<h2>Introduction</h2>
+						</a>
+						<p>Convert and do math on <a href="common.timeduration.html">TimeDuration</a> type that helped people manage duration much more accurate.</p>
+						<a href="#guide-of-timeduration" id="guide-of-timeduration" style="color: inherit; text-decoration: none;">
+							<h3>Guide of TimeDuration</h3>
+						</a>
+						<a href="#use-constructor-to-given-initial-value" id="use-constructor-to-given-initial-value" style="color: inherit; text-decoration: none;">
+							<h4>Use constructor to given initial value</h4>
+						</a>
+						<pre><code class="language-ts"><span class="hljs-keyword">import</span> { TimeDuration } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;noqueue&#x27;</span>;
+
+<span class="hljs-comment">// TimeDuration will be initialed 1 hour 23 mins 2 seconds</span>
+<span class="hljs-keyword">const</span> iTimeDuration = <span class="hljs-keyword">new</span> TimeDuration(<span class="hljs-number">1</span>, <span class="hljs-number">23</span>, <span class="hljs-number">2</span>);</code></pre>
+						<p>You could use set methods to modify <code>iTimeDuration</code> from above.</p>
+						<pre><code class="language-ts"><span class="hljs-comment">// Overwrite initial value from above with 4 hours 121 minutes 150 seconds</span>
+iTimeDuration.setHour(<span class="hljs-number">4</span>).setMinute(<span class="hljs-number">121</span>).setSecond(<span class="hljs-number">150</span>);
+
+<span class="hljs-comment">// Now try to print it in console</span>
+<span class="hljs-comment">// The result must be: 6 hours 3 minutes 30 seconds 0 millisecond</span>
+<span class="hljs-built_in">console</span>.log(iTimeDuration.toString());</code></pre>
+						<p>Instead of <a href="common.timeduration.html#constructor">TimeDuration.constructor</a> like usual, you could try:</p>
+						<ul>
+							<li><a href="common.timeduration.html#frommillisecond">TimeDuration.fromMillisecond</a></li>
+							<li><a href="common.timeduration.html#fromsecond">TimeDuration.fromSecond</a></li>
+							<li><a href="common.timeduration.html#fromminute">TimeDuration.fromMinute</a></li>
+							<li><a href="common.timeduration.html#fromhour">TimeDuration.fromHour</a></li>
+						</ul>
+						<a href="#do-math-on-timeduration" id="do-math-on-timeduration" style="color: inherit; text-decoration: none;">
+							<h4>Do math on TimeDuration</h4>
+						</a>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> iDurationA = <span class="hljs-keyword">new</span> TimeDuration(<span class="hljs-number">4</span>, <span class="hljs-number">52</span>, <span class="hljs-number">21</span>, <span class="hljs-number">312</span>);
+
+<span class="hljs-keyword">const</span> iDurationB = TimeDuration.fromMillisecond(<span class="hljs-number">13242532</span>);
+
+<span class="hljs-keyword">const</span> iDurationSum = iDurationA.add(iDurationB);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Before A:&#x27;</span>, iDurationA.toString());
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Before B:&#x27;</span>, iDurationB.toString());
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;After A:&#x27;</span>, iDurationA.toString());
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;After B:&#x27;</span>, iDurationB.toString());
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Result A+B:&#x27;</span>, iDurationSum.toString());</code></pre>
+						<p>Result:</p>
+						<pre><code><span class="hljs-attr">Before A:</span> <span class="hljs-number">4</span> <span class="hljs-string">hours</span> <span class="hljs-number">52</span> <span class="hljs-string">minutes</span> <span class="hljs-number">21</span> <span class="hljs-string">seconds</span> <span class="hljs-number">312</span> <span class="hljs-string">milliseconds</span>
+<span class="hljs-attr">Before B:</span> <span class="hljs-number">3</span> <span class="hljs-string">hours</span> <span class="hljs-number">40</span> <span class="hljs-string">minutes</span> <span class="hljs-number">42</span> <span class="hljs-string">seconds</span> <span class="hljs-number">532</span> <span class="hljs-string">milliseconds</span>
+<span class="hljs-attr">After A:</span> <span class="hljs-number">4</span> <span class="hljs-string">hours</span> <span class="hljs-number">52</span> <span class="hljs-string">minutes</span> <span class="hljs-number">21</span> <span class="hljs-string">seconds</span> <span class="hljs-number">312</span> <span class="hljs-string">milliseconds</span>
+<span class="hljs-attr">After B:</span> <span class="hljs-number">3</span> <span class="hljs-string">hours</span> <span class="hljs-number">40</span> <span class="hljs-string">minutes</span> <span class="hljs-number">42</span> <span class="hljs-string">seconds</span> <span class="hljs-number">532</span> <span class="hljs-string">milliseconds</span>
+<span class="hljs-string">Result</span> <span class="hljs-string">A+B:</span> <span class="hljs-number">8</span> <span class="hljs-string">hours</span> <span class="hljs-number">33</span> <span class="hljs-string">minutes</span> <span class="hljs-number">3</span> <span class="hljs-string">seconds</span> <span class="hljs-number">844</span> <span class="hljs-string">milliseconds</span></code></pre>
+						<p>As you see, A and B weren&#39;t change after calculation.</p>
+						<p>We could shorten these code, in case you don&#39;t want to reuse <code>iDurationB</code>:</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> iDurationA = <span class="hljs-keyword">new</span> TimeDuration(<span class="hljs-number">4</span>, <span class="hljs-number">52</span>, <span class="hljs-number">21</span>, <span class="hljs-number">312</span>);
+<span class="hljs-keyword">const</span> iDurationSum = .add(TimeDuration.fromMillisecond(<span class="hljs-number">13242532</span>));
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Result A+B:&#x27;</span>, iDurationSum.toString());</code></pre>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">TimeDuration</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="common.timeduration.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#add" class="tsd-kind-icon">add</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#diff" class="tsd-kind-icon">diff</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#eq" class="tsd-kind-icon">eq</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#gt" class="tsd-kind-icon">gt</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#gte" class="tsd-kind-icon">gte</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#lt" class="tsd-kind-icon">lt</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#lte" class="tsd-kind-icon">lte</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#sethour" class="tsd-kind-icon">set<wbr>Hour</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#setmillisecond" class="tsd-kind-icon">set<wbr>Millisecond</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#setminute" class="tsd-kind-icon">set<wbr>Minute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#setsecond" class="tsd-kind-icon">set<wbr>Second</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#sub" class="tsd-kind-icon">sub</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#tomillisecond" class="tsd-kind-icon">to<wbr>Millisecond</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#tosecond" class="tsd-kind-icon">to<wbr>Second</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="common.timeduration.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="common.timeduration.html#fromhour" class="tsd-kind-icon">from<wbr>Hour</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="common.timeduration.html#frommillisecond" class="tsd-kind-icon">from<wbr>Millisecond</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="common.timeduration.html#fromminute" class="tsd-kind-icon">from<wbr>Minute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="common.timeduration.html#fromsecond" class="tsd-kind-icon">from<wbr>Second</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Time<wbr>Duration<span class="tsd-signature-symbol">(</span>h<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, m<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, s<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, ms<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:37</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates an instance of TimeDuration.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> h: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Hour</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> m: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Minute</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> s: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Second</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> ms: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Millisecond</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="add" class="tsd-anchor"></a>
+					<h3>add</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:158</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create new instance of <a href="common.timeduration.html">TimeDuration</a> that&#39;s sum of two given <a href="common.timeduration.html">TimeDuration</a></p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="diff" class="tsd-anchor"></a>
+					<h3>diff</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">diff<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:182</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create new instance of <a href="common.timeduration.html">TimeDuration</a> that&#39;s different between two given <a href="common.timeduration.html">TimeDuration</a></p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="eq" class="tsd-anchor"></a>
+					<h3>eq</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">eq<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:193</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Does two <a href="common.timeduration.html">TimeDuration</a> equal?</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gt" class="tsd-anchor"></a>
+					<h3>gt</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">gt<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:203</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Does current instance greater than given duration?</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gte" class="tsd-anchor"></a>
+					<h3>gte</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">gte<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:213</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Does current instance greater or equal to given duration?</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="lt" class="tsd-anchor"></a>
+					<h3>lt</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">lt<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:223</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Does current instance less than given duration?</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="lte" class="tsd-anchor"></a>
+					<h3>lte</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">lte<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:233</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Does current instance less or equal to given duration?</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sethour" class="tsd-anchor"></a>
+					<h3>set<wbr>Hour</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Hour<span class="tsd-signature-symbol">(</span>h<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:114</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set hour of current instance</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>h: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Hour</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setmillisecond" class="tsd-anchor"></a>
+					<h3>set<wbr>Millisecond</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Millisecond<span class="tsd-signature-symbol">(</span>ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:147</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set millisecond of current instance</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ms: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setminute" class="tsd-anchor"></a>
+					<h3>set<wbr>Minute</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Minute<span class="tsd-signature-symbol">(</span>m<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:125</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set minute of current instance</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>m: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Minute</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setsecond" class="tsd-anchor"></a>
+					<h3>set<wbr>Second</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Second<span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:136</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set second of current instance</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>s: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Second</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sub" class="tsd-anchor"></a>
+					<h3>sub</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">sub<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:168</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create new instance of <a href="common.timeduration.html">TimeDuration</a> that&#39;s subtraction of two given <a href="common.timeduration.html">TimeDuration</a></p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Another <a href="common.timeduration.html">TimeDuration</a> instance</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tomillisecond" class="tsd-anchor"></a>
+					<h3>to<wbr>Millisecond</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Millisecond<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:242</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get instance&#39;s duration in millisecond</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tosecond" class="tsd-anchor"></a>
+					<h3>to<wbr>Second</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Second<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:251</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get instance&#39;s duration in second</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tostring" class="tsd-anchor"></a>
+					<h3>to<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:260</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get instance&#39;s duration in string</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="fromhour" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Hour</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Hour<span class="tsd-signature-symbol">(</span>hour<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:104</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create new instance of <a href="common.timeduration.html">TimeDuration</a> from hours</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>hour: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Durations in hours</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="frommillisecond" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Millisecond</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Millisecond<span class="tsd-signature-symbol">(</span>msec<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:61</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create new instance of <a href="common.timeduration.html">TimeDuration</a> from milliseconds</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>msec: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Duration in milliseconds</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="fromminute" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Minute</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Minute<span class="tsd-signature-symbol">(</span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:91</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create new instance of <a href="common.timeduration.html">TimeDuration</a> from minutes</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>min: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Duration in minutes</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="fromsecond" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Second</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Second<span class="tsd-signature-symbol">(</span>sec<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in time-duration.ts:77</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create new instance of <a href="common.timeduration.html">TimeDuration</a> from seconds</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p><a href="common.timeduration.html">TimeDuration</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>sec: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Duration in seconds</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="common.timeduration.html" class="tsd-signature-type">TimeDuration</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/common.html">Common</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/infinity_loop.html">Infinity <wbr>Loop</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/utilities.html">Utilities</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="common.eventdispatcher.html" class="tsd-kind-icon">Event<wbr>Dispatcher</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="common.timeduration.html" class="tsd-kind-icon">Time<wbr>Duration</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="common.timeduration.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#add" class="tsd-kind-icon">add</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#diff" class="tsd-kind-icon">diff</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#eq" class="tsd-kind-icon">eq</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#gt" class="tsd-kind-icon">gt</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#gte" class="tsd-kind-icon">gte</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#lt" class="tsd-kind-icon">lt</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#lte" class="tsd-kind-icon">lte</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#sethour" class="tsd-kind-icon">set<wbr>Hour</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#setmillisecond" class="tsd-kind-icon">set<wbr>Millisecond</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#setminute" class="tsd-kind-icon">set<wbr>Minute</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#setsecond" class="tsd-kind-icon">set<wbr>Second</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#sub" class="tsd-kind-icon">sub</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#tomillisecond" class="tsd-kind-icon">to<wbr>Millisecond</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#tosecond" class="tsd-kind-icon">to<wbr>Second</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="common.timeduration.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="common.timeduration.html#fromhour" class="tsd-kind-icon">from<wbr>Hour</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="common.timeduration.html#frommillisecond" class="tsd-kind-icon">from<wbr>Millisecond</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="common.timeduration.html#fromminute" class="tsd-kind-icon">from<wbr>Minute</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="common.timeduration.html#fromsecond" class="tsd-kind-icon">from<wbr>Second</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/common.iconfiguration.html" class="tsd-kind-icon">IConfiguration</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/common.ifillresult.html" class="tsd-kind-icon">IFill<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/common.html#callback" class="tsd-kind-icon">Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/common.html#iparallelfunction" class="tsd-kind-icon">IParallel<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/common.html#iqueuefunction" class="tsd-kind-icon">IQueue<wbr>Function</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
