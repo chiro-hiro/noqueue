@@ -1,6 +1,6 @@
 ## Introduction
 
-[[ParallelLoop]] allowed you to trigger all jobs separately, It guaratees that, the same job won't be trigger type but different jobs will be happened in the same time.
+[[ParallelLoop]] allowed you to trigger all jobs separately, It guaratees that, the same job won't be trigger twice but different jobs will be happened at the same time.
 
 ## Example code
 

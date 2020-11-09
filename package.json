@@ -19,10 +19,8 @@
   "keywords": [
     "queue",
     "synchronous",
-    "round-robin",
-    "failover",
-    "event",
-    "handle"
+    "asynchronous",
+    "failover"
   ],
   "author": "chiro8x@gmail.com",
   "license": "MIT",
