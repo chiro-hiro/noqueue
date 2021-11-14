@@ -181,7 +181,10 @@ export class QueueLoop extends EventDispatcher {
    * @memberof QueueLoop
    */
   private worker(...params: any[]) {
-    if (this.handler !== null || this.stopped) return;
+    if (this.handler !== null || this.stopped) {
+      this.emit('stop');
+      return;
+    }
     const nextFunction = this.next();
     let ret: any[] = [];
     if (typeof nextFunction === 'undefined' && this.handler === null) {

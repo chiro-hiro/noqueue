@@ -11,3 +11,4 @@ typedoc.json
 .eslintrc.json
 .prettierrc
 .typedoc-plugin-external-module-name.js
+.github

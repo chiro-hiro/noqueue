@@ -28,6 +28,23 @@ export function Fill(...asyncFunctions: IQueueFunction[]): Promise<IFillResult[]
 }
 
 /**
+ * Apply an async method on a given array
+ * @param {T[]} arrayData Array liked data
+ * @param {(element: T) => Promise<any>} asyncFunction The function that will be apply for
+ * all elements of the given array
+ * @returns {any[]}
+ */
+export function OneForAll<T>(arrayData: T[], asyncFunction: (element: T) => Promise<any>): Promise<any[]> {
+  if (
+    typeof asyncFunction !== 'function' ||
+    (typeof asyncFunction === 'function' && asyncFunction.constructor.name !== 'AsyncFunction')
+  ) {
+    throw Error("The given function isn't an async function");
+  }
+  return Promise.all(arrayData.map((e: T) => asyncFunction(e)));
+}
+
+/**
  * It's a race, we're only take the first result.
  * In case, every racer was failed we return last error
  * [[include: utilities-first-001.md]]

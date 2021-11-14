@@ -1,4 +1,4 @@
-import { First, WaitSleep, TillSuccess, Fill } from './utilities';
+import { First, WaitSleep, TillSuccess, Fill, OneForAll } from './utilities';
 import { EventDispatcher } from './event-dispatcher';
 import { QueueLoop } from './queue-loop';
 import { ParallelLoop } from './parallel-loop';
@@ -15,4 +15,5 @@ export const Utilities = {
   WaitSleep,
   TillSuccess,
   Fill,
+  OneForAll,
 };
