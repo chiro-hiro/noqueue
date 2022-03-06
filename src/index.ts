@@ -6,11 +6,13 @@ import { TimeDuration } from './time-duration';
 
 export * from './common';
 
-export { EventDispatcher, QueueLoop, ParallelLoop, TimeDuration };
+export { EventDispatcher, QueueLoop, ParallelLoop, TimeDuration, First, WaitSleep, TillSuccess, Fill, OneForAll };
 
-export default { EventDispatcher, QueueLoop, ParallelLoop, TimeDuration };
-
-export const Utilities = {
+export default {
+  EventDispatcher,
+  QueueLoop,
+  ParallelLoop,
+  TimeDuration,
   First,
   WaitSleep,
   TillSuccess,

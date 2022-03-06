@@ -5,7 +5,7 @@ noQueue is the package that extended loop and queue. It allowed you to write bet
 ## Installation
 
 ```
-install i noqueue
+npm i noqueue
 ```
 
 _Required: Node.JS >= 10.x.x_

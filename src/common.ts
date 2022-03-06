@@ -6,6 +6,14 @@
 export type Callback = (...params: any[]) => void;
 
 /**
+ * Logger interface
+ * @export
+ * */
+export interface ILogger {
+  debug(...params: any[]): void;
+}
+
+/**
  * Job type was used in [[QueueLoop.add]], they need to be `async function`.
  * _Don't try your luck with normal function_
  * @export
@@ -30,6 +38,13 @@ export interface IConfiguration {
    * @memberof [[IConfiguration]]
    */
   paddingTime: number;
+
+  /**
+   * Logger instance to help debug process
+   * @type {ILogger}
+   * @memberof [[IConfiguration]]
+   */
+  logger?: ILogger;
 }
 
 /**

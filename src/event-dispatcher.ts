@@ -8,9 +8,9 @@ const getOnceTimeEventName = (v: string) => `${onceTimePrefix}${v}`;
 
 const getSpecialName = (v: string) => `${specialPrefix}${v}`;
 
-const isOnceTime = (v: string) => v.substr(0, 2) === onceTimePrefix;
+const isOnceTime = (v: string) => v.substring(0, 2) === onceTimePrefix;
 
-const isSpecial = (v: string) => v.substr(0, 2) === specialPrefix;
+const isSpecial = (v: string) => v.substring(0, 2) === specialPrefix;
 
 /**
  * [[include: event-dispatcher-001.md]]

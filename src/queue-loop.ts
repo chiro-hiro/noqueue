@@ -1,5 +1,5 @@
 import { EventDispatcher } from './event-dispatcher';
-import { IConfiguration, IQueueFunction } from './common';
+import { IConfiguration, IQueueFunction, ILogger } from './common';
 import TimeDuration from './time-duration';
 
 /**
@@ -15,7 +15,17 @@ export class QueueLoop extends EventDispatcher {
    * @type {IConfiguration}
    * @memberof QueueLoop
    */
-  private config: IConfiguration = { paddingTime: 1000 };
+  private config: IConfiguration = <IConfiguration>{ paddingTime: 1000 };
+
+  private logger: ILogger = { debug: () => undefined };
+
+  private shutdownCallback: () => void = () => undefined;
+
+  private shutdown: boolean = false;
+
+  private debug(...params: any[]): void {
+    this.logger.debug(...params);
+  }
 
   /**
    * Mapping of job's name to job in queue
@@ -97,6 +107,9 @@ export class QueueLoop extends EventDispatcher {
   constructor(conf?: Partial<IConfiguration>) {
     super();
     this.config = { ...this.config, ...conf };
+    if (typeof conf?.logger !== 'undefined') {
+      this.logger = conf.logger;
+    }
   }
 
   /**
@@ -134,6 +147,7 @@ export class QueueLoop extends EventDispatcher {
     this.paddingTime[name] = paddingTimeTime.toMillisecond();
     this.queue[name] = func;
     this.order.push(name);
+    this.debug('add', name, 'padding', this.paddingTime[name], 'ms');
     return this;
   }
 
@@ -148,6 +162,7 @@ export class QueueLoop extends EventDispatcher {
       this.order.splice(this.order.indexOf(name), 1);
       delete this.queue[name];
       delete this.paddingTime[name];
+      this.debug('remove', name, 'padding', this.paddingTime[name], 'ms');
       return typeof this.queue[name] === 'undefined';
     }
     return false;
@@ -160,6 +175,11 @@ export class QueueLoop extends EventDispatcher {
    * @memberof QueueLoop
    */
   private next(): IQueueFunction {
+    if (this.counter === 0 && this.shutdown === true) {
+      this.stop();
+      this.shutdownCallback();
+      return async () => {};
+    }
     // Empty queue
     if (this.order.length < 1) {
       return async () => {
@@ -189,19 +209,23 @@ export class QueueLoop extends EventDispatcher {
     let ret: any[] = [];
     if (typeof nextFunction === 'undefined' && this.handler === null) {
       // Register empty worker
+      this.debug('can not get next function, we add empty worker');
       this.handler = setTimeout(() => {
         this.handler = null;
         this.worker();
       }, this.config.paddingTime);
       return;
     }
+    this.debug('processing', this.getCurrentJob());
     nextFunction(...params)
       .then((returnValue: any) => {
         // Ret is alway an array
         ret = Array.isArray(returnValue) ? returnValue : [returnValue];
+        this.debug(this.getCurrentJob(), 'processed successful');
         this.emit('success', this.currentJob, ...ret);
       })
       .catch((error: Error) => {
+        this.debug(this.getCurrentJob(), 'processed failed');
         this.emit('error', this.currentJob, error);
       })
       .finally(() => {
@@ -216,6 +240,28 @@ export class QueueLoop extends EventDispatcher {
           );
         }
       });
+  }
+
+  /**
+   * Change padding time of queue loop
+   * @param paddingTime
+   * @memberof QueueLoop
+   */
+  public setPaddingTime(paddingTime: number) {
+    if (Number.isInteger(paddingTime) && Number.isFinite(paddingTime)) {
+      this.debug('change padding time to', paddingTime);
+      this.config.paddingTime = paddingTime;
+    }
+    throw new Error('Can not set padding time');
+  }
+
+  /**
+   * Schedule a shutdown
+   * @param callback Shutdown callback
+   */
+  public scheduleShutdown(callback: () => void) {
+    this.shutdown = true;
+    this.shutdownCallback = callback;
   }
 
   /**
