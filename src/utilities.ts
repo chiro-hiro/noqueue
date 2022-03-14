@@ -8,12 +8,25 @@ import { IQueueFunction, IFillResult } from './common';
  * @param {...IQueueFunction[]} asyncFunctions Async function that will be added
  * @return {Promise<IFillResult[]>}
  */
+
+function isPromise(p: any): boolean {
+  if (typeof p === 'object' && typeof p.then === 'function' && typeof p.catch === 'function') {
+    return true;
+  }
+
+  return false;
+}
+
+function isAsyncFunction(p: any): boolean {
+  if (typeof p === 'function' && (p.constructor.name === 'AsyncFunction' || isPromise(p()))) {
+    return true;
+  }
+  return false;
+}
+
 export function Fill(...asyncFunctions: IQueueFunction[]): Promise<IFillResult[]> {
   for (let i = 0; i < asyncFunctions.length; i += 1) {
-    if (
-      typeof asyncFunctions[i] !== 'function' ||
-      (typeof asyncFunctions[i] === 'function' && asyncFunctions[i].constructor.name !== 'AsyncFunction')
-    ) {
+    if (!isAsyncFunction(asyncFunctions[i])) {
       throw Error('One of input parameters was not async function');
     }
   }
@@ -35,10 +48,7 @@ export function Fill(...asyncFunctions: IQueueFunction[]): Promise<IFillResult[]
  * @returns {any[]}
  */
 export function OneForAll<T>(arrayData: T[], asyncFunction: (element: T) => Promise<any>): Promise<any[]> {
-  if (
-    typeof asyncFunction !== 'function' ||
-    (typeof asyncFunction === 'function' && asyncFunction.constructor.name !== 'AsyncFunction')
-  ) {
+  if (!isAsyncFunction(asyncFunction)) {
     throw Error("The given function isn't an async function");
   }
   return Promise.all(arrayData.map((e: T) => asyncFunction(e)));
@@ -54,10 +64,7 @@ export function OneForAll<T>(arrayData: T[], asyncFunction: (element: T) => Prom
  */
 export function First(...asyncFunctions: IQueueFunction[]): Promise<any> {
   for (let i = 0; i < asyncFunctions.length; i += 1) {
-    if (
-      typeof asyncFunctions[i] !== 'function' ||
-      (typeof asyncFunctions[i] === 'function' && asyncFunctions[i].constructor.name !== 'AsyncFunction')
-    ) {
+    if (!isAsyncFunction(asyncFunctions[i])) {
       throw Error('One of input parameters was not async function');
     }
   }
@@ -99,10 +106,7 @@ export async function TillSuccess<T>(
   paddingTime: number = 1000,
   retries: number = 3,
 ): Promise<T> {
-  if (
-    typeof asyncFunction !== 'function' ||
-    (typeof asyncFunction === 'function' && asyncFunction.constructor.name !== 'AsyncFunction')
-  ) {
+  if (!isAsyncFunction(asyncFunction)) {
     throw Error('One of input parameters was not async function');
   }
   let tried = 0;
