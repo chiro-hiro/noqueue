@@ -38,13 +38,6 @@ export interface IConfiguration {
    * @memberof [[IConfiguration]]
    */
   paddingTime: number;
-
-  /**
-   * Logger instance to help debug process
-   * @type {ILogger}
-   * @memberof [[IConfiguration]]
-   */
-  logger?: ILogger;
 }
 
 /**
