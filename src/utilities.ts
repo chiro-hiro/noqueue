@@ -5,10 +5,10 @@ import { IQueueFunction, IFillResult } from './common';
  * It will return and array of [[IFillResult]]
  * [[include: utilities-fill-001.md]]
  * @export
- * @param {...IQueueFunction[]} asyncFunctions Async function that will be added
+ * @param {IQueueFunction[]} asyncFunctions Async function that will be added
  * @return {Promise<IFillResult[]>}
  */
-export function Fill(...asyncFunctions: IQueueFunction[]): Promise<IFillResult[]> {
+export function Fill(asyncFunctions: IQueueFunction[]): Promise<IFillResult[]> {
   for (let i = 0; i < asyncFunctions.length; i += 1) {
     if (
       typeof asyncFunctions[i] !== 'function' ||
@@ -34,14 +34,14 @@ export function Fill(...asyncFunctions: IQueueFunction[]): Promise<IFillResult[]
  * all elements of the given array
  * @returns {any[]}
  */
-export function OneForAll<T>(arrayData: T[], asyncFunction: (element: T) => Promise<any>): Promise<any[]> {
+export function OneForAll<T>(arrayData: T[], asyncFunction: (element: T) => Promise<any>): Promise<IFillResult[]> {
   if (
     typeof asyncFunction !== 'function' ||
     (typeof asyncFunction === 'function' && asyncFunction.constructor.name !== 'AsyncFunction')
   ) {
     throw Error("The given function isn't an async function");
   }
-  return Promise.all(arrayData.map((e: T) => asyncFunction(e)));
+  return Fill(arrayData.map((e: T) => async () => asyncFunction(e)));
 }
 
 /**
@@ -49,10 +49,10 @@ export function OneForAll<T>(arrayData: T[], asyncFunction: (element: T) => Prom
  * In case, every racer was failed we return last error
  * [[include: utilities-first-001.md]]
  * @export
- * @param {...IQueueFunction[]} asyncFunctions Async function that will be added
+ * @param {IQueueFunction[]} asyncFunctions Async function that will be added
  * @return {Promise<any>}
  */
-export function First(...asyncFunctions: IQueueFunction[]): Promise<any> {
+export function First(asyncFunctions: IQueueFunction[]): Promise<any> {
   for (let i = 0; i < asyncFunctions.length; i += 1) {
     if (
       typeof asyncFunctions[i] !== 'function' ||

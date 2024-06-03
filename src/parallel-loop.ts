@@ -15,7 +15,7 @@ export class ParallelLoop extends EventDispatcher {
    * @type {IConfiguration}
    * @memberof ParallelLoop
    */
-  private config: IConfiguration = { paddingTime: 100 };
+  private config: IConfiguration = { paddingTime: 10 };
 
   /**
    * Jobs's pool
@@ -56,14 +56,6 @@ export class ParallelLoop extends EventDispatcher {
    * @memberof ParallelLoop
    */
   private scheduleTime: { [key: string]: number } = {};
-
-  /**
-   * Current active job's name
-   * @private
-   * @type {string}
-   * @memberof ParallelLoop
-   */
-  private currentJob: string = '';
 
   /**
    * Internal clock
@@ -107,7 +99,11 @@ export class ParallelLoop extends EventDispatcher {
    * @return {ParallelLoop}
    * @memberof ParallelLoop
    */
-  public add(name: string, func: IParallelFunction, paddingTimeTime: TimeDuration): ParallelLoop {
+  public add(
+    name: string,
+    func: IParallelFunction,
+    paddingTimeTime: TimeDuration = TimeDuration.fromMillisecond(10),
+  ): ParallelLoop {
     if (arguments.length < 2) throw new Error('Wrong number of arguments');
     if (typeof this.pool[name] !== 'undefined') throw new Error(`Duplicated, ${name} was existed in pool`);
     if (typeof name !== 'string') throw new TypeError('Invalid param, "name" was not string');
@@ -137,60 +133,49 @@ export class ParallelLoop extends EventDispatcher {
   }
 
   /**
-   * Increase and get next job
-   * @private
-   * @memberof ParallelLoop
-   */
-  private getJob() {
-    if (this.order.length < 1) {
-      throw new Error('Pool is empty now');
-    }
-    if (this.counter >= this.order.length || typeof this.order[this.counter] === 'undefined') this.counter = 0;
-    this.currentJob = this.order[this.counter];
-    this.counter += 1;
-  }
-
-  /**
    * Worker who's actually do jobs
    * @private
    * @memberof ParallelLoop
    */
   private worker() {
     if (this.handler === null && this.stopped === false) {
-      this.getJob();
       let ret: any[] = [];
-      // Only trigger job that wasn't lock and on schedule
-      if (this.lock[this.currentJob] === false && this.scheduleTime[this.currentJob] <= Date.now()) {
-        // Handle async function and normal function separate
-        if (this.pool[this.currentJob].constructor.name === 'AsyncFunction') {
-          this.lock[this.currentJob] = true;
-          // Trigger async function
-          this.pool[this.currentJob]()
-            .then((returnValue: any) => {
-              // Ret is alway an array
+      for (let i = 0; i < this.order.length; i += 1) {
+        const jobName = this.order[i];
+        // Only trigger job that wasn't lock and on schedule
+        if (this.lock[jobName] === false && this.scheduleTime[jobName] <= Date.now()) {
+          // Handle async function and normal function separate
+          if (this.pool[jobName].constructor.name === 'AsyncFunction') {
+            this.lock[jobName] = true;
+            // Trigger async function
+            this.pool[jobName]()
+              // eslint-disable-next-line no-loop-func
+              .then((returnValue: any) => {
+                // Ret is alway an array
+                ret = Array.isArray(returnValue) ? returnValue : [returnValue];
+                // Emit event
+                this.emit('success', jobName, ...ret);
+              })
+              .catch((err: Error) => {
+                this.emit('error', jobName, err);
+              })
+              .finally(() => {
+                this.lock[jobName] = false;
+                this.scheduleTime[jobName] = Date.now() + this.paddingTime[jobName];
+              });
+          } else {
+            // Trigger function
+            try {
+              this.lock[jobName] = true;
+              const returnValue = this.pool[jobName]();
               ret = Array.isArray(returnValue) ? returnValue : [returnValue];
-              // Emit event
-              this.emit('success', this.currentJob, ...ret);
-            })
-            .catch((err: Error) => {
-              this.emit('error', this.currentJob, err);
-            })
-            .finally(() => {
-              this.lock[this.currentJob] = false;
-              this.scheduleTime[this.currentJob] = Date.now() + this.paddingTime[this.currentJob];
-            });
-        } else {
-          // Trigger function
-          try {
-            this.lock[this.currentJob] = true;
-            const returnValue = this.pool[this.currentJob]();
-            ret = Array.isArray(returnValue) ? returnValue : [returnValue];
-            this.emit('success', this.currentJob, ...ret);
-          } catch (err) {
-            this.emit('error', this.currentJob, err);
-          } finally {
-            this.lock[this.currentJob] = false;
-            this.scheduleTime[this.currentJob] = Date.now() + this.paddingTime[this.currentJob];
+              this.emit('success', jobName, ...ret);
+            } catch (err) {
+              this.emit('error', jobName, err);
+            } finally {
+              this.lock[jobName] = false;
+              this.scheduleTime[jobName] = Date.now() + this.paddingTime[jobName];
+            }
           }
         }
       }
