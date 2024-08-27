@@ -129,17 +129,17 @@ export class QueueLoop extends EventDispatcher {
    * @return {QueueLoop}
    * @memberof QueueLoop
    */
-  public add(
-    name: string,
-    func: IQueueFunction,
-    paddingTimeTime: TimeDuration = TimeDuration.fromMillisecond(10),
-  ): QueueLoop {
+  public add(name: string, func: IQueueFunction, paddingTimeTime?: TimeDuration): QueueLoop {
     if (arguments.length < 2) throw new Error('Wrong number of arguments, expecting 2-3');
     if (typeof this.queue[name] !== 'undefined') throw new Error(`Duplicated, ${name} was existed in queue`);
     if (typeof name !== 'string') throw new TypeError('Invalid param, "name" was not string');
     if (typeof func !== 'function') throw new TypeError('Invalid param, "func" was not function');
     if (func.constructor.name !== 'AsyncFunction') throw new TypeError('Invalid param, "func" was not async function');
-    this.paddingTime[name] = paddingTimeTime.toMillisecond();
+    if (paddingTimeTime) {
+      this.paddingTime[name] = paddingTimeTime.toMillisecond();
+    } else {
+      this.paddingTime[name] = this.config.paddingTime;
+    }
     this.queue[name] = func;
     this.order.push(name);
     return this;
@@ -220,13 +220,10 @@ export class QueueLoop extends EventDispatcher {
       .finally(() => {
         // Single worker
         if (this.handler === null) {
-          this.handler = setTimeout(
-            () => {
-              this.handler = null;
-              this.worker(...ret);
-            },
-            this.paddingTime[this.currentJob] > 0 ? this.paddingTime[this.currentJob] : this.config.paddingTime,
-          );
+          this.handler = setTimeout(() => {
+            this.handler = null;
+            this.worker(...ret);
+          }, this.paddingTime[this.currentJob]);
         }
       });
   }

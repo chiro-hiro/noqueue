@@ -95,21 +95,22 @@ export class ParallelLoop extends EventDispatcher {
    * Add job into pool
    * @param {string} name Name of job
    * @param {IParallelFunction} func Function that will be triggered
-   * @param {TimeDuration} paddingTimeTime Padding time between executions
+   * @param {TimeDuration} paddingTime Padding time between executions
    * @return {ParallelLoop}
    * @memberof ParallelLoop
    */
-  public add(
-    name: string,
-    func: IParallelFunction,
-    paddingTimeTime: TimeDuration = TimeDuration.fromMillisecond(10),
-  ): ParallelLoop {
+  public add(name: string, func: IParallelFunction, paddingTime?: TimeDuration): ParallelLoop {
     if (arguments.length < 2) throw new Error('Wrong number of arguments');
     if (typeof this.pool[name] !== 'undefined') throw new Error(`Duplicated, ${name} was existed in pool`);
     if (typeof name !== 'string') throw new TypeError('Invalid param, "name" was not string');
     if (typeof func !== 'function') throw new TypeError('Invalid param, "func" was not function');
-    this.paddingTime[name] = paddingTimeTime.toMillisecond();
-    this.scheduleTime[name] = paddingTimeTime.toMillisecond() + Date.now();
+    if (paddingTime) {
+      this.paddingTime[name] = paddingTime.toMillisecond();
+      this.scheduleTime[name] = paddingTime.toMillisecond() + Date.now();
+    } else {
+      this.paddingTime[name] = this.config.paddingTime;
+      this.scheduleTime[name] = this.config.paddingTime + Date.now();
+    }
     this.pool[name] = func;
     this.lock[name] = false;
     this.order.push(name);
